@@ -13,8 +13,6 @@
     <title>Title</title>
 </head>
 <body>
-<c:forEach items="${list}" var="user">
-    ${user.id}--${user.name}--${user.score}--${user.password}<br/>
-</c:forEach>
+<jsp:forward page="login/toLogin"></jsp:forward>
 </body>
 </html>

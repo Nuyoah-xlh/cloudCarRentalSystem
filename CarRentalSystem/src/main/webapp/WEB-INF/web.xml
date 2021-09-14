@@ -43,16 +43,30 @@
     </filter-mapping>
 
     <!-- 加载静态资源 -->
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+    <!--    <servlet-name>default</servlet-name>-->
+    <!--    <url-pattern>*.js</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+    <!--    <servlet-name>default</servlet-name>-->
+    <!--    <url-pattern>*.css</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+    <!--    <servlet-name>default</servlet-name>-->
+    <!--    <url-pattern>*.jpg</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--//加入以下配置-->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.png</url-pattern>
         <url-pattern>*.jpg</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
