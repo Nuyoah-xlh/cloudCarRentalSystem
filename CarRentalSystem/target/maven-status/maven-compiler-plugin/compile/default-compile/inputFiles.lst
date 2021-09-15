@@ -1,5 +1,6 @@
 E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\bean\Login.java
 E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\mapper\LoginMapper.java
+E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\controller\RegisterController.java
 E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\service\impl\LoginServiceImpl.java
 E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\controller\LoginController.java
 E:\cloudCarRentalSystem\CarRentalSystem\src\main\java\cn\rental\service\LoginService.java

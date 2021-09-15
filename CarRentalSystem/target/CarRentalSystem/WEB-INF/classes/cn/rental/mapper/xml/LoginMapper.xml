@@ -6,8 +6,4 @@
         from LOGIN
         where USER_NAME = #{USER_NAME}
     </select>
-    <select id="findAll" resultType="Login">
-        select *
-        from LOGIN
-    </select>
 </mapper>

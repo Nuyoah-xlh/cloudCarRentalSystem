@@ -1,0 +1,6 @@
+cn\rental\mapper\LoginMapper.class
+cn\rental\service\impl\LoginServiceImpl.class
+cn\rental\service\LoginService.class
+cn\rental\controller\LoginController.class
+cn\rental\controller\RegisterController.class
+cn\rental\bean\Login.class
