@@ -21,7 +21,6 @@
 
     <!-- 扫描业务代码 -->
     <context:component-scan base-package="cn.rental"/>
-    <!--<context:component-scan base-package="cn.rental.controller"/>-->
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -144,6 +144,7 @@
     <build>
         <finalName>CarRentalSystem</finalName>
         <resources>
+            <!--打包src/main/java下的文件-->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -151,6 +152,14 @@
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>false</filtering>
+            </resource>
+            <!--打包src/main/resources文件夹下的文件-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
             </resource>
         </resources>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -168,7 +177,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                 </plugin>
-                
+
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>

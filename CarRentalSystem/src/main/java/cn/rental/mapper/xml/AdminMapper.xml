@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rental.mapper.AdminMapper">
+    <!--getAdminInfos-->
+    <select id="getAdminInfos" resultType="AdminInfo">
+        SELECT ADMIN_ID, USER_NAME, Name, USER_TYPE, STATE, LAST_TIME
+        FROM login
+                 NATURAL JOIN admin
+    </select>
+
+</mapper>
