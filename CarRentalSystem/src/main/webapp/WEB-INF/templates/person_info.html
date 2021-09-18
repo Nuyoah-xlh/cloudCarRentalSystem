@@ -5,7 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>个人信息</title>
+    <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
+    <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <!--    部分css样式-->
     <style>
         * {
             padding: 0;
@@ -104,101 +107,268 @@
     </style>
 </head>
 
-<body>
-<form action="www.baidu.com" method="post">
-    <label id="user_name">用户名：</label><input type="text" name="user_name" id="user_name" value="" placeholder="请输入地址"
-                                             readonly="true"/><span class="spa spa3"><a href="#"
-                                                                                        class="reset_pas">修改密码?</a></span><br/>
-    <label id="username">姓&nbsp;名：</label><input type="text" name="username" id="username" value="" placeholder="请输入姓名"
-                                                 readonly="true"/><span class="spa spa1"></span><br/>
-    <label id="sex">性&nbsp;别：</label><input type="text" name="sex" id="sex" value="" placeholder="请输入手机号"
-                                            readonly="true"/><span class="spa spa3"></span><br/>
-    <label id="id_card">身份证：</label><input type="text" name="id_card" id="id_card" value="" placeholder="请输入手机号"
-                                           readonly="true"/><span class="spa spa3"></span><br/>
-    <label id="userphone">手机号：</label><input type="text" name="userphone" id="userphone" value="" placeholder="请输入手机号"/><span
-        class="spa spa2"></span><br/>
-    <label id="address">地&nbsp;址：</label><input type="text" name="address" id="address" value=""
-                                                placeholder="请输入地址"/><span class="spa spa3"></span><br/>
-    <label id="credit">信誉分：</label><input type="text" name="credit" id="credit" value="" placeholder="请输入地址"/><span
-        class="spa spa3"></span><br/>
-    <label id="address_num">邮&nbsp;箱：</label><input type="email" name="address_num" id="address_num" value=""
-                                                    placeholder="请输入地址"/><span class="spa spa3"></span><br/>
-    <label id="income">收&nbsp;益：</label><input type="text" name="income" id="income" value="" placeholder="请输入地址"/><span
-        class="spa spa3"></span><br/>
-    <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <button type="submit" id="sub">注册</button>
-    <label>&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="reset" value="放弃" id="sub2"/>
-</form>
+<body class="sb-nav-fixed">
+<!--顶部导航栏-->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="#">云 租 车 系 统</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="搜 索" aria-label="Search for..."
+                   aria-describedby="btnNavbarSearch"/>
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- 个人设置-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">账号安全</a></li>
+                <li><a class="dropdown-item" href="#!">个人信息</a></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
+                <li><a class="dropdown-item" href="#!">注销账号</a></li>
+                <li><a class="dropdown-item" href="#!">退出登录</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!--侧边栏-->
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">数据</div>
+                    <a class="nav-link" th:href="@{/login/login_success}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        数据分析
+                    </a>
+                    <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+                       aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        用户管理
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                         data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">租车人</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">车主</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">黑名单</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                       aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        车辆管理
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                         data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                               data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                               aria-controls="pagesCollapseAuth">
+                                查看车辆
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                 data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">所有车辆</a>
+                                    <a class="nav-link" href="register.html">已租车辆</a>
+                                    <a class="nav-link" href="password.html">待租车辆</a>
+                                    <a class="nav-link" href="password.html">已下架车辆</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                               data-bs-target="#pagesCollapseError" aria-expanded="false"
+                               aria-controls="pagesCollapseError">
+                                车辆上/下架
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                                 data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">上架</a>
+                                    <a class="nav-link" href="404.html">下架</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
+                       aria-expanded="false" aria-controls="collapseLayouts2">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        订单管理
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
+                         data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">历史订单</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">当前订单</a>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">系统功能</div>
+                    <a class="nav-link" href="charts.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        我的留言
+                    </a>
+                    <a class="nav-link" href="tables.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        平台收益
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">已登录:</div>
+                <a th:href="@{/basic/perInfo}" th:text="${session.user_name}"></a>
+            </div>
+        </nav>
+    </div>
+    <!--    显示信息-->
+    <div id="layoutSidenav_content">
+        <form th:action="@{/basic/revise}" method="post">
+            <label id="user_name_">用户名：</label><input type="text" name="user_name" id="user_name"
+                                                      th:value="${personInfo.USER_NAME}"
+                                                      th:placeholder="${personInfo.USER_NAME}" readonly="true"/><span
+                class="spa spa3"><a
+                href="#"
+                class="reset_pas">修改密码?</a></span><br/>
+            <label id="username_">姓&nbsp;名：</label><input type="text" name="username" id="username"
+                                                          th:value="${personInfo.NAME}"
+                                                          th:placeholder="${personInfo.NAME}" readonly="true"/><span
+                class="spa spa1"></span><br/>
+            <label id="admin_id_" th:if="${personInfo.USER_TYPE}==0">工&nbsp;号：</label><input
+                th:if="${personInfo.USER_TYPE}==0" type="email" name="admin_id" id="admin_id"
+                th:value="${personInfo.ADMIN_ID}"
+                th:placeholder="${personInfo.ADMIN_ID}" readonly="" true/><span class="spa spa3"></span><br/>
+            <label id="sex_" th:if="${personInfo.USER_TYPE}!=0">性&nbsp;别：</label><input
+                th:if="${personInfo.USER_TYPE}!='0'" type="text" name="sex" id="sex"
+                th:value="${personInfo.SEX}==0?'女':'男'"
+                th:placeholder="${personInfo.SEX}==0?'女':'男'"
+                readonly="true"/><span class="spa spa3"></span><br/>
+            <label id="id_card_">身份证：</label><input type="text" name="id_card" id="id_card" th:value="${personInfo.ID}"
+                                                    th:placeholder="${personInfo.ID}"
+                                                    readonly="true"/><span class="spa spa3"></span><br/>
+            <label id="userphone_" th:if="${personInfo.USER_TYPE}!=0">手机号：</label><input
+                th:if="${personInfo.USER_TYPE}!=0" type="text" name="userphone" id="userphone"
+                th:value="${personInfo.TEL}"
+                th:placeholder="${personInfo.TEL}"/><span class="spa spa2"></span><br/>
+            <label id="address_" th:if="${personInfo.USER_TYPE}!=0">地&nbsp;址：</label><input
+                th:if="${personInfo.USER_TYPE}!=0" type="text" name="address" id="address"
+                th:value="${personInfo.LOCATION}"
+                th:placeholder="${personInfo.LOCATION}"/><span class="spa spa3"></span><br/>
+            <label id="credit_" th:if="${personInfo.USER_TYPE}!=0">信誉分：</label><input th:if="${personInfo.USER_TYPE}!=0"
+                                                                                      type="text" name="credit"
+                                                                                      id="credit"
+                                                                                      th:value="${personInfo.CREDIT}"
+                                                                                      th:placeholder="${personInfo.CREDIT}"
+                                                                                      readonly="true"/><span
+                class="spa spa3"></span><br/>
+            <label id="address_num_" th:if="${personInfo.USER_TYPE}!=0">邮&nbsp;箱：</label><input
+                th:if="${personInfo.USER_TYPE}!=0" type="email" name="address_num" id="address_num"
+                th:value="${personInfo.EMAIL}"
+                th:placeholder="${personInfo.EMAIL}"/><span class="spa spa3"></span><br/>
+            <label id="income_" th:if="${personInfo.USER_TYPE}==2">收&nbsp;益：</label><input type="text" name="income"
+                                                                                           th:if="${personInfo.USER_TYPE}==2"
+                                                                                           id="income"
+                                                                                           th:value="${personInfo.INCOME}"
+                                                                                           th:placeholder="${personInfo.INCOME}"
+                                                                                           readonly="" true/><span
+                class="spa spa3"></span><br/>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="submit" id="sub" value="提交修改"/>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="reset" value="放弃修改" id="sub2"/>
+        </form>
+    </div>
 
-<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
-<script type="text/javascript">
-    window.onload = function () {
-        $("#username").focus()
-    }
-    /************************  失焦判断  **********************************/
-    $("input").blur(function () {
-        $(".spa").css("color", "#BD362F")
-        if ($(this).is("#username")) { //姓名判断
-            var na = /^[\u4E00-\u9FA5]{2,4}$/
-            if ($("#username").val() != "") {
-                if (!(na.test($("#username").val()))) {
-                    $(".spa1").text("请输入2-4个汉字");
-                    $(this).css("border", "1px solid #BD362F")
-                    return false;
-                } else if (na) {
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            $("#username").focus()
+        }
+        /************************  失焦判断  **********************************/
+        $("input").blur(function () {
+            $(".spa").css("color", "#BD362F")
+            if ($(this).is("#username")) { //姓名判断
+                var na = /^[\u4E00-\u9FA5]{2,4}$/
+                if ($("#username").val() != "") {
+                    if (!(na.test($("#username").val()))) {
+                        $(".spa1").text("请输入2-4个汉字");
+                        $(this).css("border", "1px solid #BD362F")
+                        return false;
+                    } else if (na) {
+                        $(".spa1").text("");
+                        return true;
+                    }
+                } else {
                     $(".spa1").text("");
-                    return true;
                 }
-            } else {
-                $(".spa1").text("");
             }
-        }
-        if ($(this).is("#userphone")) { //手机号判断
-            var ph = /^1[3|5|7|8|][0-9]{9}$/
-            if ($("#userphone").val() != "") {
-                if (!(ph.test($("#userphone").val()))) {
-                    $(".spa2").text("请输入正确手机号");
-                    $(this).css("border", "1px solid #BD362F")
-                    return false;
-                } else if (ph) {
+            if ($(this).is("#userphone")) { //手机号判断
+                var ph = /^1[3|5|7|8|][0-9]{9}$/
+                if ($("#userphone").val() != "") {
+                    if (!(ph.test($("#userphone").val()))) {
+                        $(".spa2").text("请输入正确手机号");
+                        $(this).css("border", "1px solid #BD362F")
+                        return false;
+                    } else if (ph) {
+                        $(".spa2").text("");
+                        return true;
+                    }
+                } else {
                     $(".spa2").text("");
-                    return true;
                 }
+            }
+
+
+        })
+        /********************** 聚焦提示 ************************/
+        $("input").focus(function () {
+            if ($(this).is("#username")) {
+                $(".spa1").text("2-4个汉字").css("color", "#aaa")
+                $(this).css("border", "1px solid #aaa")
+            }
+            if ($(this).is("#userphone")) {
+                $(".spa2").text("11位手机号码").css("color", "#aaa")
+                $(this).css("border", "1px solid #aaa")
+            }
+        })
+        /*********************** 提交验证 ***************************/
+        $("#sub").click(function () {
+            var na = /^[\u4E00-\u9FA5]{2,4}$/; //姓名正则
+            var ph = /^1[3|5|7|8|][0-9]{9}$/; //手机号正则
+            if (na.test($("#username").val()) && ph.test($("#userphone").val()) && ad.test($("#useraddress").val())) {
+                return true;
             } else {
-                $(".spa2").text("");
+                if ($("#username").val() == "") {
+                    $(".spa1").text('请你填写用户名')
+                }
+                if ($("#userphone").val() == "") {
+                    $(".spa2").text('请你填写手机号')
+                }
+                return false;
             }
-        }
-
-
-    })
-    /********************** 聚焦提示 ************************/
-    $("input").focus(function () {
-        if ($(this).is("#username")) {
-            $(".spa1").text("2-4个汉字").css("color", "#aaa")
-            $(this).css("border", "1px solid #aaa")
-        }
-        if ($(this).is("#userphone")) {
-            $(".spa2").text("11位手机号码").css("color", "#aaa")
-            $(this).css("border", "1px solid #aaa")
-        }
-    })
-    /*********************** 提交验证 ***************************/
-    $("#sub").click(function () {
-        var na = /^[\u4E00-\u9FA5]{2,4}$/; //姓名正则
-        var ph = /^1[3|5|7|8|][0-9]{9}$/; //手机号正则
-        if (na.test($("#username").val()) && ph.test($("#userphone").val()) && ad.test($("#useraddress").val())) {
-            return true;
-        } else {
-            if ($("#username").val() == "") {
-                $(".spa1").text('请你填写用户名')
-            }
-            if ($("#userphone").val() == "") {
-                $(".spa2").text('请你填写手机号')
-            }
-            return false;
-        }
-    })
-</script>
+        })
+    </script>
+    <script th:src="@{/static/login/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/scripts.js}"></script>
+    <script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>
+    <script th:src="@{/static/login/simple-datatables@latest.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js}"></script>
 </body>
 
 </html>

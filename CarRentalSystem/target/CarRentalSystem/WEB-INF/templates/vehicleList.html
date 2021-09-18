@@ -9,21 +9,6 @@
     <title>云租车系统</title>
     <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
     <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
-    <style>
-        .state0 {
-            color: red;
-
-        }
-
-        .state1 {
-            color: green;
-        }
-
-        .state2 {
-            color: grey;
-        }
-
-    </style>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -57,8 +42,8 @@
         </li>
     </ul>
 </nav>
+<!--侧边栏-->
 <div id="layoutSidenav">
-    <!--侧边栏-->
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
@@ -78,9 +63,9 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/admin/hirer_list}">租车人</a>
-                            <a class="nav-link" th:href="@{/admin/owner_list}">车主</a>
-                            <a class="nav-link" th:href="@{/admin/blacklist}">黑名单</a>
+                            <a class="nav-link" href="layout-static.html">租车人</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">车主</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">黑名单</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -101,7 +86,7 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list}">所有车辆</a>
+                                    <a class="nav-link" href="login.html">所有车辆</a>
                                     <a class="nav-link" href="register.html">已租车辆</a>
                                     <a class="nav-link" href="password.html">待租车辆</a>
                                     <a class="nav-link" href="password.html">已下架车辆</a>
@@ -155,119 +140,57 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">数据分析</h1>
+                <h1 class="mt-4">车辆信息</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">用户数据</li>
+                    <li class="breadcrumb-item active">车辆</li>
                 </ol>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
-                            <div class="card-body">个人资料</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查看</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-warning text-white mb-4">
-                            <div class="card-body">历 史 登 录</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查 看</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-success text-white mb-4">
-                            <div class="card-body">管 理 员</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" th:href="@{/admin/admin_list}">查看</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">未读留言</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查看</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i> 订单成交量统计图
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myAreaChart" width="100%" height="40"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i> 用户数量统计图
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myBarChart" width="100%" height="40"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i> 用户状态信息表
+                        <i class="fas fa-table me-1"></i> 车辆信息表
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
-                                <th>用户名</th>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>手机号</th>
-                                <th>用户类型</th>
-                                <th>信誉分</th>
-                                <th>状态</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>已租时长</th>
+                                <th>租赁状态</th>
+                                <th>位置</th>
+                                <th>最迟还车时间</th>
+                                <th>价格</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>用户名</th>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>手机号</th>
-                                <th>用户类型</th>
-                                <th>信誉分</th>
-                                <th>状态</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>已租时长</th>
+                                <th>租赁状态</th>
+                                <th>位置</th>
+                                <th>最迟还车时间</th>
+                                <th>价格</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <!--/*@thymesVar id="user_list" type="java.util.List"*/-->
-                            <tr th:each="user: ${user_list}">
-                                <!--/*@thymesVar id="user" type="cn.rental.bean.UserInfo"*/-->
-                                <td th:text="${user.USER_NAME}"></td>
-                                <td th:text="${user.NAME}"></td>
-                                <td th:switch="${user.SEX}">
-                                    <span th:case="1">男</span>
-                                    <span th:case="0">女</span>
+                            <tr th:each="vehicle: ${vehicle_list}">
+                                <td th:text="${vehicle.VEHICLE_BRAND}"></td>
+                                <td th:text="${vehicle.VEHICLE_TYPE}"></td>
+                                <td th:text="${vehicle.VEHICLE_ID}"></td>
+                                <td th:text="${vehicle.OWNER_ID}"></td>
+                                <td th:text="${vehicle.DURATION}"></td>
+                                <td th:switch="${vehicle.STATUS}">
+                                    <span th:case="0">在租</span>
+                                    <span th:case="1">已租</span>
+                                    <span th:case="2">已下架</span>
                                 </td>
-                                <td th:text="${user.TEL}"></td>
-                                <td th:switch="${user.USER_TYPE}">
-                                    <span th:case="1">租车人</span>
-                                    <span th:case="2">车主</span>
-                                </td>
-                                <td th:text="${user.CREDIT}"></td>
-                                <td th:switch="${user.STATE}">
-                                    <span th:case="0" th:class="state0">离线</span>
-                                    <span th:case="1" th:class="state1">在线</span>
-                                    <span th:case="2" th:class="state2">已注销</span>
-                                </td>
+                                <td th:text="${vehicle.LOCATION}"></td>
+                                <td th:text="${vehicle.DEADLINE}"></td>
+                                <td th:text="${vehicle.RENTAL_PRICE}"></td>
                             </tr>
                             </tbody>
                         </table>

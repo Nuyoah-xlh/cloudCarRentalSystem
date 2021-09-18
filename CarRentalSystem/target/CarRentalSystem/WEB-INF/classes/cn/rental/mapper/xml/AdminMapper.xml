@@ -8,4 +8,87 @@
                  NATURAL JOIN admin
     </select>
 
+    <!--getPerInfo-->
+    <select id="getPerInfo" resultType="UserInfo">
+        SELECT USER_NAME, NAME, ID, ADMIN_ID
+        FROM admin
+        WHERE USER_NAME = #{USER_NAME}
+    </select>
+
+    <!--getPerInfo-->
+    <select id="getHirerList" resultType="Hirer">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               ID,
+               CREDIT,
+               FREQUENCY,
+               EMAIL,
+               TEL
+        FROM hirer_of_vehicle
+    </select>
+
+    <select id="getOwnerList" resultType="Owner">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               ID,
+               CREDIT,
+               FREQUENCY,
+               EMAIL,
+               TEL,
+               INCOME
+        FROM owner_of_vehicle
+    </select>
+
+    <!--getBlackList_Hirer-->
+    <select id="getBlackList_Hirer" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               ID,
+               CREDIT,
+               FREQUENCY,
+               EMAIL,
+               TEL,
+               USER_TYPE
+        FROM hirer_of_vehicle
+                 natural join login
+        where CREDIT &lt; 60
+    </select>
+
+    <!--getBlackList_Owner-->
+    <select id="getBlackList_Owner" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               ID,
+               CREDIT,
+               FREQUENCY,
+               EMAIL,
+               TEL,
+               USER_TYPE
+        FROM owner_of_vehicle
+                 natural join login
+        WHERE CREDIT
+                  &lt;
+              60
+    </select>
+
+    <!--getVehicleList-->
+    <select id="getVehicleList" resultType="Vehicle">
+        SELECT VEHICLE_ID,
+               VEHICLE_TYPE,
+               OWNER_ID,
+               DURATION,
+               STATUS,
+               RENTAL_PRICE,
+               DEADLINE,
+               LOCATION,
+               PIC_PATH,
+               VEHICLE_BRAND
+        FROM vehicle
+    </select>
+
+
 </mapper>

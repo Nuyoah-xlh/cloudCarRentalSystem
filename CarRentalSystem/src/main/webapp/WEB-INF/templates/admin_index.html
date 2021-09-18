@@ -57,8 +57,8 @@
         </li>
     </ul>
 </nav>
-<!--侧边栏-->
 <div id="layoutSidenav">
+    <!--侧边栏-->
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
@@ -78,9 +78,9 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">租车人</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">车主</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">黑名单</a>
+                            <a class="nav-link" th:href="@{/admin/hirer_list}">租车人</a>
+                            <a class="nav-link" th:href="@{/admin/owner_list}">车主</a>
+                            <a class="nav-link" th:href="@{/admin/blacklist}">黑名单</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -101,7 +101,7 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">所有车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list}">所有车辆</a>
                                     <a class="nav-link" href="register.html">已租车辆</a>
                                     <a class="nav-link" href="password.html">待租车辆</a>
                                     <a class="nav-link" href="password.html">已下架车辆</a>
@@ -148,7 +148,7 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">已登录:</div>
-                <a href="#" th:text="${session.user_name}"></a>
+                <a th:href="@{/basic/perInfo}" th:text="${session.user_name}"></a>
             </div>
         </nav>
     </div>

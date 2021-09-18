@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+//登录跳转的相关控制信息
 
 @Controller
 @RequestMapping("/login")
@@ -74,7 +75,7 @@ public class LoginController {
                 user_list.addAll(hirer_list);
                 user_list.addAll(owner_list);
                 modelAndView.addObject("user_list", user_list);
-                modelAndView.addObject("user_name",httpSession.getAttribute("user_name") );
+                modelAndView.addObject("user_name", httpSession.getAttribute("user_name"));
                 modelAndView.setViewName("admin_index");
             } else {
                 modelAndView.setViewName("404");
