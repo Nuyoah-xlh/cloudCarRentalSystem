@@ -27,5 +27,25 @@ public interface AdminService {
     //查询所有车辆信息
     public List<Vehicle> getVehicleList();
 
+    //根据车辆状态查询所有车辆信息
+    public List<Vehicle> getVehicleListByStatus(Integer STATUS);
+
+    //修改选中的车辆信息
+    public void setVehicleStatusById(Vehicle vehicle);
+
+    //查询历史订单
+    public List<Order> getAllOrders();
+
+    //查询当前订单
+    public List<Order> getCurrentOrders();
+
+    //查询某人的留言记录
+    public List<Message> getMessageList(AdminInfo adminInfo);
+
+    //更新留言状态
+    public void updateMsgStatus(Message message);
+
+    //插入一条留言
+    public void addMsg(Message message);
 
 }

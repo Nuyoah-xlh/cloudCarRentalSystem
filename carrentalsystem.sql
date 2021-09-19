@@ -11,7 +11,7 @@
  Target Server Version : 50017
  File Encoding         : 65001
 
- Date: 15/09/2021 23:01:48
+ Date: 19/09/2021 22:43:36
 */
 
 SET NAMES utf8;
@@ -83,7 +83,7 @@ INSERT INTO `hirer_of_vehicle` VALUES ('zhangxiaodie', '潘亦菲', 0, '36232120
 INSERT INTO `hirer_of_vehicle` VALUES ('zhechentao', '邬淑君', 0, '130921200102136379', 100, 0, 'wuyuze_yjnpm@aol.com', '13808439179');
 INSERT INTO `hirer_of_vehicle` VALUES ('zhengmiaocui', '尹痴柳', 0, '632122198105189620', 100, 0, 'shiqiaohe_qnww@aol.com', '13200416765');
 INSERT INTO `hirer_of_vehicle` VALUES ('zhezilan', '彭涵涵', 0, '52011319910326865X', 100, 0, 'buqingyan_wkpp@qq.com', '17002398610');
-INSERT INTO `hirer_of_vehicle` VALUES ('zhushishan', '卞语晨', 0, '230421198704102551', 100, 0, 'haoruxin_pyjoj@163.com', '17713203139');
+INSERT INTO `hirer_of_vehicle` VALUES ('zhushishan', '卞语晨', 0, '230421198704102551', 59, 0, 'haoruxin_pyjoj@163.com', '17713203139');
 
 -- ----------------------------
 -- Table structure for login
@@ -159,7 +159,7 @@ INSERT INTO `login` VALUES ('zhushishan', '5b2ea4edb4012d54ed39abd0bd623020', '2
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message`  (
-  `MESSAGE_ID` int(11) NOT NULL DEFAULT '',
+  `MESSAGE_ID` int(11) NOT NULL AUTO_INCREMENT,
   `SEND_NAME` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `RECEIVE_NAME` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `DETAIL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -168,19 +168,25 @@ CREATE TABLE `message`  (
   PRIMARY KEY USING BTREE (`MESSAGE_ID`),
   INDEX `fk_5` USING BTREE(`SEND_NAME`),
   INDEX `fk_5_2` USING BTREE(`RECEIVE_NAME`),
-  CONSTRAINT `fk_5_2` FOREIGN KEY (`RECEIVE_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_5` FOREIGN KEY (`SEND_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'InnoDB free: 11264 kB; (`RECEIVE_NAME`) REFER `carrentalsystem/login`(`USER_NAME' ROW_FORMAT = Compact;
+  CONSTRAINT `fk_5` FOREIGN KEY (`SEND_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_5_2` FOREIGN KEY (`RECEIVE_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'InnoDB free: 11264 kB; (`SEND_NAME`) REFER `carrentalsystem/login`(`USER_NAME`) ' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
+INSERT INTO `message` VALUES (1, 'anfanzhen', 'baishuiqin', '开发UABUIHODIHVLIAHSLIF发耐萨里奥回复你哦急哦麻烦ven浪费那钱·1法海配合哦IQ·节操i解放后打篮球时哦好的我i啊hi哦啊皇帝瓯海区哦i后害怕foi啊红披风和气魄嗨皮哦后viahi哦粉红色起哦', '2021-09-19 20:33:39', 1);
+INSERT INTO `message` VALUES (2, 'baishuiqin', 'anfanzhen', '反倒是咖啡馆WIUGFOEH情感；·和次哦暗黑风哦IQhoi；和我到碗里的行情布林布林·', '2021-09-19 20:34:03', 1);
+INSERT INTO `message` VALUES (3, 'anfanzhen', 'baizhonglin', '而父亲的分红i为HOIDH·1FSOIDHFOIQLEWIODHOIA你视力恢复', '2021-09-19 20:34:36', 1);
+INSERT INTO `message` VALUES (4, 'baizhonglin', 'anfanzhen', '案发时覅去ghi哦', '2021-09-19 20:34:57', 1);
+INSERT INTO `message` VALUES (5, 'anfanzhen', 'baishuiqin', '11111', '2021-09-19 20:34:36', 0);
+INSERT INTO `message` VALUES (6, 'anfanzhen', 'baishuiqin', '风情地方·1', '2021-09-19 22:17:32', 0);
 
 -- ----------------------------
--- Table structure for order
+-- Table structure for orders
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`  (
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
   `ORDER_ID` int(11) NOT NULL AUTO_INCREMENT,
   `OWNER_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `HIRER_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -190,16 +196,19 @@ CREATE TABLE `order`  (
   `STATUS` int(11) NOT NULL DEFAULT '',
   `AMOUNT` double NULL DEFAULT NULL,
   `VEHICLE_ID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `VEHICLE_BRAND` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY USING BTREE (`ORDER_ID`),
   INDEX `fk_4_1` USING BTREE(`OWNER_NAME`),
   INDEX `fk_4_2` USING BTREE(`HIRER_NAME`),
-  CONSTRAINT `fk_4_2` FOREIGN KEY (`HIRER_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_4_1` FOREIGN KEY (`OWNER_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'InnoDB free: 11264 kB; (`HIRER_NAME`) REFER `carrentalsystem/login`(`USER_NAME`)' ROW_FORMAT = Compact;
+  CONSTRAINT `fk_4_1` FOREIGN KEY (`OWNER_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_4_2` FOREIGN KEY (`HIRER_NAME`) REFERENCES `login` (`USER_NAME`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'InnoDB free: 11264 kB; (`OWNER_NAME`) REFER `carrentalsystem/login`(`USER_NAME`)' ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of order
+-- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES (1, 'hejingdie', 'penghanhan', '2021-09-19 16:00:45', NULL, '捷达', 1, NULL, '京A·0085B', '京A·0085B');
+INSERT INTO `orders` VALUES (2, 'huashuhua', 'shimilv', NULL, NULL, 'GLK级', 0, NULL, '京A·012E2', '京A·012E2');
 
 -- ----------------------------
 -- Table structure for owner_of_vehicle
@@ -237,11 +246,11 @@ INSERT INTO `owner_of_vehicle` VALUES ('luchunmei', '苏采灵', 0, '65422420060
 INSERT INTO `owner_of_vehicle` VALUES ('luchunmei2', '鲁香曼', 0, '513825200007192907', 100, 0, '13203772464', 'tengxiaoyu_gikb@qq.com', 0);
 INSERT INTO `owner_of_vehicle` VALUES ('luxiangman', '孟嘉乐', 0, '520328201202232818', 100, 0, '13110203568', 'langyuchen_jbbdb@aol.com', 0);
 INSERT INTO `owner_of_vehicle` VALUES ('mengjiale', '张晓蝶', 0, '22020020110602678X', 100, 0, '13851654604', 'cendandong_xcwe@263.net', 0);
-INSERT INTO `owner_of_vehicle` VALUES ('miaorunli', '傅梦菡', 0, '220623197202270907', 100, 0, '13186026932', 'huangleqiao_lhpiq@ask.com', 0);
+INSERT INTO `owner_of_vehicle` VALUES ('miaorunli', '傅梦菡', 0, '220623197202270907', 55, 0, '13186026932', 'huangleqiao_lhpiq@ask.com', 0);
 INSERT INTO `owner_of_vehicle` VALUES ('miaorunli2', '孔熙涵', 0, '522428197801072930', 100, 0, '17020917929', 'shijiayu_rn@qq.com', 0);
 INSERT INTO `owner_of_vehicle` VALUES ('mujinglu', '昌伟洋', 0, '131100198405100053', 100, 0, '17047683248', 'pingchihai_fjd@263.net', 0);
 INSERT INTO `owner_of_vehicle` VALUES ('panqiuyan', '云小南', 0, '532823198208245307', 100, 0, '13377489360', 'zouwenjie_sdyr@yeah.com', 0);
-INSERT INTO `owner_of_vehicle` VALUES ('panyifei', '潘秋雁', 0, '362523201612295249', 100, 0, '18703650381', 'wumanyun_oq@msn.com', 0);
+INSERT INTO `owner_of_vehicle` VALUES ('panyifei', '潘秋雁', 0, '362523201612295249', 41, 0, '18703650381', 'wumanyun_oq@msn.com', 0);
 
 -- ----------------------------
 -- Table structure for vehicle
@@ -264,25 +273,25 @@ CREATE TABLE `vehicle`  (
 -- ----------------------------
 -- Records of vehicle
 -- ----------------------------
-INSERT INTO `vehicle` VALUES ('京A·0085B', '捷达', 'hejingdie', 24, 0, 10, '2021-11-30 23:22:58', '云南省西双版纳傣族自治州勐腊县', 'carImage/dazhongjiedanew.jpg', '大众');
-INSERT INTO `vehicle` VALUES ('京A·012E2', 'GLK级', 'huashuhua', 24, 0, 77, '2021-11-30 23:22:58', '四川省攀枝花市东区', 'carImage/31.jpg', '奔驰');
-INSERT INTO `vehicle` VALUES ('京A·01660', '捷达', 'huaxinxin', 24, 0, 15, '2021-11-30 23:22:58', '福建省漳州市东山县', 'carImage/dazhongjiedanew.jpg', '大众');
-INSERT INTO `vehicle` VALUES ('京A·0431B', '卡罗拉', 'huayuanchun', 24, 0, 40, '2021-11-30 23:22:58', '山东省济南市平阴县', 'carImage/151.jpg', '丰田');
-INSERT INTO `vehicle` VALUES ('京A·06426', 'GL8', 'jiangyixuan', 24, 0, 32, '2021-11-30 23:22:58', '河北省保定市雄县', 'carImage/bkakw.jpg', '别克');
-INSERT INTO `vehicle` VALUES ('京A·07B75', '福克斯', 'kongxihan', 24, 0, 40, '2021-11-30 23:22:58', '湖南省益阳市资阳区', 'carImage/171.jpg', '福特');
-INSERT INTO `vehicle` VALUES ('京A·08CB6', 'C系', 'kongxihan2', 24, 0, 60, '2021-11-30 23:22:58', '山西省临汾地区蒲县', 'carImage/29.jpg', '奔驰');
-INSERT INTO `vehicle` VALUES ('京A·08EC2', '凯美瑞', 'leiyanxue', 24, 0, 26, '2021-11-30 23:22:58', '甘肃省甘南藏族自治州碌曲县', 'carImage/152.jpg', '丰田');
-INSERT INTO `vehicle` VALUES ('京A·0A428', 'G级', 'lifuzi', 24, 0, 508, '2021-11-30 23:22:58', '河北省邯郸市永年县', 'carImage/benz-G.jpg', '奔驰');
-INSERT INTO `vehicle` VALUES ('京A·0B9D2', '赛欧', 'lihanxiang', 24, 0, 75, '2021-11-30 23:22:58', '河北省沧州市', 'carImage/saiou.jpg', '雪佛兰');
-INSERT INTO `vehicle` VALUES ('京A·0BCB8', '普拉多', 'liujiayi', 24, 0, 51, '2021-11-30 23:22:58', '重庆市潼南县', 'carImage/147.jpg', '丰田');
-INSERT INTO `vehicle` VALUES ('京A·0C433', 'Q3', 'luchunmei', 24, 0, 45, '2021-11-30 23:22:58', '辽宁省丹东市振兴区', 'carImage/AUDIQ3.jpg', '奥迪');
-INSERT INTO `vehicle` VALUES ('京A·0D2DB', '野马', 'luchunmei2', 24, 0, 88, '2021-11-30 23:22:58', '吉林省四平市市辖区', 'carImage/sailinyema.jpg', '福特');
-INSERT INTO `vehicle` VALUES ('京A·0D578', 'C系', 'luxiangman', 24, 0, 56, '2021-11-30 23:22:58', '贵州省贵阳市白云区', 'carImage/29.jpg', '奔驰');
-INSERT INTO `vehicle` VALUES ('京A·0D8B3', '汉兰达', 'mengjiale', 24, 0, 39, '2021-11-30 23:22:58', '江西省萍乡市上栗县', 'carImage/147.jpg', '丰田');
-INSERT INTO `vehicle` VALUES ('京A·0DDBF', '昂科拉', 'miaorunli', 24, 0, 30, '2021-11-30 23:22:58', '广东省湛江市麻章区', 'carImage/78.jpg', '别克');
+INSERT INTO `vehicle` VALUES ('京A·0085B', '捷达', 'hejingdie', 3, 2, 10, '2021-11-30 23:22:58', '云南省西双版纳傣族自治州勐腊县', 'carImage/dazhongjiedanew.jpg', '大众');
+INSERT INTO `vehicle` VALUES ('京A·012E2', 'GLK级', 'huashuhua', 3, 0, 77, '2021-11-30 23:22:58', '四川省攀枝花市东区', 'carImage/31.jpg', '奔驰');
+INSERT INTO `vehicle` VALUES ('京A·01660', '捷达', 'huaxinxin', 3, 0, 15, '2021-11-30 23:22:58', '福建省漳州市东山县', 'carImage/dazhongjiedanew.jpg', '大众');
+INSERT INTO `vehicle` VALUES ('京A·0431B', '卡罗拉', 'huayuanchun', 3, 0, 40, '2021-11-30 23:22:58', '山东省济南市平阴县', 'carImage/151.jpg', '丰田');
+INSERT INTO `vehicle` VALUES ('京A·06426', 'GL8', 'jiangyixuan', 3, 0, 32, '2021-11-30 23:22:58', '河北省保定市雄县', 'carImage/bkakw.jpg', '别克');
+INSERT INTO `vehicle` VALUES ('京A·07B75', '福克斯', 'kongxihan', 2, 0, 40, '2021-11-30 23:22:58', '湖南省益阳市资阳区', 'carImage/171.jpg', '福特');
+INSERT INTO `vehicle` VALUES ('京A·08CB6', 'C系', 'kongxihan2', 2, 0, 60, '2021-11-30 23:22:58', '山西省临汾地区蒲县', 'carImage/29.jpg', '奔驰');
+INSERT INTO `vehicle` VALUES ('京A·08EC2', '凯美瑞', 'leiyanxue', 2, 0, 26, '2021-11-30 23:22:58', '甘肃省甘南藏族自治州碌曲县', 'carImage/152.jpg', '丰田');
+INSERT INTO `vehicle` VALUES ('京A·0A428', 'G级', 'lifuzi', 2, 1, 508, '2021-11-30 23:22:58', '河北省邯郸市永年县', 'carImage/benz-G.jpg', '奔驰');
+INSERT INTO `vehicle` VALUES ('京A·0B9D2', '赛欧', 'lihanxiang', 2, 0, 75, '2021-11-30 23:22:58', '河北省沧州市', 'carImage/saiou.jpg', '雪佛兰');
+INSERT INTO `vehicle` VALUES ('京A·0BCB8', '普拉多', 'liujiayi', 6, 1, 51, '2021-11-30 23:22:58', '重庆市潼南县', 'carImage/147.jpg', '丰田');
+INSERT INTO `vehicle` VALUES ('京A·0C433', 'Q3', 'luchunmei', 6, 0, 45, '2021-11-30 23:22:58', '辽宁省丹东市振兴区', 'carImage/AUDIQ3.jpg', '奥迪');
+INSERT INTO `vehicle` VALUES ('京A·0D2DB', '野马', 'luchunmei2', 6, 0, 88, '2021-11-30 23:22:58', '吉林省四平市市辖区', 'carImage/sailinyema.jpg', '福特');
+INSERT INTO `vehicle` VALUES ('京A·0D578', 'C系', 'luxiangman', 6, 0, 56, '2021-11-30 23:22:58', '贵州省贵阳市白云区', 'carImage/29.jpg', '奔驰');
+INSERT INTO `vehicle` VALUES ('京A·0D8B3', '汉兰达', 'mengjiale', 6, 0, 39, '2021-11-30 23:22:58', '江西省萍乡市上栗县', 'carImage/147.jpg', '丰田');
+INSERT INTO `vehicle` VALUES ('京A·0DDBF', '昂科拉', 'miaorunli', 6, 0, 30, '2021-11-30 23:22:58', '广东省湛江市麻章区', 'carImage/78.jpg', '别克');
 INSERT INTO `vehicle` VALUES ('京A·0EC49', 'C系', 'miaorunli2', 24, 0, 61, '2021-11-30 23:22:58', '广东省阳江市阳东县', 'carImage/29.jpg', '奔驰');
 INSERT INTO `vehicle` VALUES ('京A·0EEE3', 'GLK级', 'mujinglu', 24, 0, 78, '2021-11-30 23:22:58', '湖北省黄石市', 'carImage/31.jpg', '奔驰');
-INSERT INTO `vehicle` VALUES ('京A·0F700', 'CC', 'panqiuyan', 24, 0, 16, '2021-11-30 23:22:58', '四川省成都市锦江区', 'carImage/106.jpg', '大众');
+INSERT INTO `vehicle` VALUES ('京A·0F700', 'CC', 'panqiuyan', 24, 2, 16, '2021-11-30 23:22:58', '四川省成都市锦江区', 'carImage/106.jpg', '大众');
 INSERT INTO `vehicle` VALUES ('京A·11C0C', '迈锐宝', 'panyifei', 24, 0, 17, '2021-11-30 23:22:58', '新疆维吾尔族自治区巴音郭楞蒙古自治州', 'carImage/309.jpg', '雪佛兰');
 
 SET FOREIGN_KEY_CHECKS = 1;

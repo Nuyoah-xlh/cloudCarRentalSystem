@@ -90,5 +90,80 @@
         FROM vehicle
     </select>
 
+    <!--getVehicleList-->
+    <select id="getVehicleListByStatus" resultType="Vehicle">
+        SELECT VEHICLE_ID,
+               VEHICLE_TYPE,
+               OWNER_ID,
+               DURATION,
+               STATUS,
+               RENTAL_PRICE,
+               DEADLINE,
+               LOCATION,
+               PIC_PATH,
+               VEHICLE_BRAND
+        FROM vehicle
+        WHERE STATUS = #{STATUS}
+    </select>
+
+    <!--setVehicleStatusById-->
+    <update id="setVehicleStatusById" parameterType="Vehicle">
+        UPDATE vehicle
+        SET STATUS=#{STATUS}
+        WHERE VEHICLE_ID = #{VEHICLE_ID};
+    </update>
+
+    <!--getAllOrders-->
+    <select id="getAllOrders" resultType="Order">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        FROM orders
+    </select>
+
+    <!--getCurrentOrders-->
+    <select id="getCurrentOrders" resultType="Order">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        FROM orders
+        WHERE STATUS != 2
+    </select>
+
+    <!--getMessageList-->
+    <select id="getMessageList" resultType="Message" parameterType="AdminInfo">
+        SELECT MESSAGE_ID, SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS
+        FROM message
+        WHERE SEND_NAME = #{USER_NAME}
+           OR RECEIVE_NAME = #{USER_NAME}
+    </select>
+
+    <!--updateMsgStatus-->
+    <update id="updateMsgStatus" parameterType="Message">
+        UPDATE message
+        set STATUS = 1
+        WHERE MESSAGE_ID = #{MESSAGE_ID}
+    </update>
+
+    <!--addMsg-->
+    <insert id="addMsg" parameterType="Message">
+        INSERT INTO message(SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS)
+        VALUES (#{SEND_NAME}, #{RECEIVE_NAME}, #{DETAIL}, #{SEND_TIME}, #{STATUS})
+    </insert>
+
 
 </mapper>

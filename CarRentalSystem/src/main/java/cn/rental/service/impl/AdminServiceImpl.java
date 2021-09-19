@@ -83,4 +83,71 @@ public class AdminServiceImpl implements AdminService {
             return null;
         }
     }
+
+    @Override
+    public List<Vehicle> getVehicleListByStatus(Integer STATUS) {
+        try {
+            return adminMapper.getVehicleListByStatus(STATUS);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public void setVehicleStatusById(Vehicle vehicle) {
+        try {
+            adminMapper.setVehicleStatusById(vehicle);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        try {
+            return adminMapper.getAllOrders();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<Order> getCurrentOrders() {
+        try {
+            return adminMapper.getCurrentOrders();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<Message> getMessageList(AdminInfo adminInfo) {
+        try {
+            return adminMapper.getMessageList(adminInfo);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public void updateMsgStatus(Message message) {
+        try {
+            adminMapper.updateMsgStatus(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void addMsg(Message message) {
+        try {
+            adminMapper.addMsg(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

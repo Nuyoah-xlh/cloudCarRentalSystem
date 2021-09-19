@@ -9,8 +9,54 @@
     <title>云租车系统</title>
     <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
     <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/static/modal/css/jquery.my-modal.1.1.winStyle.css}" rel="stylesheet"/>
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>
+    <script>
+        $(document).ready(function () {
+            var cli;
+            // alert('11111');
+            var m1 = new MyModal.modal(function () {
+                alert("删除成功！");
+                cli.click();
+            });
+            $("table td .btn1").click(function () {
+                var res = $(this).parent().siblings(".veh_info").text();
+                $("#veh_info_").html(res);
+                m1.show();
+                cli = $(this).siblings("a")[0];
+                // alert(q);
+            });
+            // $(".btn1").click(function () {
+            //     m1.show();
+            //     var q = $(this).siblings("a").text();
+            //     alert(q);
+            // })
+        });
+    </script>
 </head>
 <body class="sb-nav-fixed">
+<!--模态框-->
+<div class="m-modal">
+    <div class="m-modal-dialog">
+        <div class="m-top">
+            <h4 class="m-modal-title">
+            </h4>
+            <span class="m-modal-close">&times;</span>
+        </div>
+        <div class="m-middle">
+            <!--content-->
+            <p>确认将该辆车上架：</p>
+            <p id="veh_info_"></p>
+
+        </div>
+        <div class="m-bottom">
+            <button class="m-btn-sure">确定</button>
+            <button class="m-btn-cancel">取消</button>
+        </div>
+    </div>
+
+</div>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="#">云 租 车 系 统</a>
@@ -31,19 +77,18 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">账号安全</a></li>
-                <li><a class="dropdown-item" href="#!">个人信息</a></li>
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
                 <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" href="#!">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
 </nav>
-<!--侧边栏-->
 <div id="layoutSidenav">
+    <!--侧边栏-->
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
@@ -63,9 +108,9 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">租车人</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">车主</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">黑名单</a>
+                            <a class="nav-link" th:href="@{/admin/hirer_list}">租车人</a>
+                            <a class="nav-link" th:href="@{/admin/owner_list}">车主</a>
+                            <a class="nav-link" th:href="@{/admin/blacklist}">黑名单</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -86,10 +131,10 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">所有车辆</a>
-                                    <a class="nav-link" href="register.html">已租车辆</a>
-                                    <a class="nav-link" href="password.html">待租车辆</a>
-                                    <a class="nav-link" href="password.html">已下架车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list}">所有车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=1)}">已租车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=0)}">待租车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2)}">已下架车辆</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -101,8 +146,9 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="401.html">上架</a>
-                                    <a class="nav-link" href="404.html">下架</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2,opt='up')}">上架</a>
+                                    <a class="nav-link"
+                                       th:href="@{/admin/vehicle_list_rent(status=0,opt='down')}">下架</a>
                                 </nav>
                             </div>
                         </nav>
@@ -116,12 +162,12 @@
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">历史订单</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">当前订单</a>
+                            <a class="nav-link" th:href="@{/admin/all_order}">所有订单</a>
+                            <a class="nav-link" th:href="@{/admin/current_order}">当前订单</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">系统功能</div>
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
@@ -156,11 +202,12 @@
                                 <th>型号</th>
                                 <th>车牌号</th>
                                 <th>车主用户名</th>
-                                <th>已租时长</th>
+                                <th>已租时长(小时)</th>
                                 <th>租赁状态</th>
                                 <th>位置</th>
                                 <th>最迟还车时间</th>
-                                <th>价格</th>
+                                <th>价格(元/天)</th>
+                                <th th:if="${opt}!=null">操作</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -173,14 +220,15 @@
                                 <th>租赁状态</th>
                                 <th>位置</th>
                                 <th>最迟还车时间</th>
-                                <th>价格</th>
+                                <th>价格(元/天)</th>
+                                <th th:if="${opt}!=null">操作</th>
                             </tr>
                             </tfoot>
                             <tbody>
                             <tr th:each="vehicle: ${vehicle_list}">
-                                <td th:text="${vehicle.VEHICLE_BRAND}"></td>
-                                <td th:text="${vehicle.VEHICLE_TYPE}"></td>
-                                <td th:text="${vehicle.VEHICLE_ID}"></td>
+                                <td th:text="${vehicle.VEHICLE_BRAND}+'&nbsp;'" class="veh_info"></td>
+                                <td th:text="${vehicle.VEHICLE_TYPE}+'&nbsp;'" class="veh_info"></td>
+                                <td th:text="${vehicle.VEHICLE_ID}+'&nbsp;'" class="veh_info"></td>
                                 <td th:text="${vehicle.OWNER_ID}"></td>
                                 <td th:text="${vehicle.DURATION}"></td>
                                 <td th:switch="${vehicle.STATUS}">
@@ -191,6 +239,11 @@
                                 <td th:text="${vehicle.LOCATION}"></td>
                                 <td th:text="${vehicle.DEADLINE}"></td>
                                 <td th:text="${vehicle.RENTAL_PRICE}"></td>
+                                <td th:if="${opt}!=null">
+                                    <a th:href="@{/admin/updateVehById(VEHICLE_ID=${vehicle.VEHICLE_ID},veh_status=${vehicle.STATUS==2?0:2},opt=${opt})}"
+                                       style="visibility:hidden;position: absolute;"></a>
+                                    <button class="btn1" th:text="${opt=='up'?'上架':'下架'}"></button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -211,6 +264,9 @@
         </footer>
     </div>
 </div>
+<!--<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>-->
+<!--<script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>-->
+
 <script th:src="@{/static/login/bootstrap.bundle.min.js}"
         crossorigin="anonymous"></script>
 <script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>

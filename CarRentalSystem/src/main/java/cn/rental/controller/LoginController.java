@@ -63,6 +63,7 @@ public class LoginController {
         }
     }
 
+    //登录成功
     @RequestMapping("/login_success")
     public ModelAndView login_success(HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
@@ -87,5 +88,13 @@ public class LoginController {
         return modelAndView;
     }
 
+    //退出登录
+    @GetMapping("/signOut")
+    public ModelAndView signOut(HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        httpSession.invalidate();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
 
 }

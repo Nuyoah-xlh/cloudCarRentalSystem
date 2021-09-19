@@ -31,13 +31,12 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">账号安全</a></li>
-                <li><a class="dropdown-item" href="#!">个人信息</a></li>
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
                 <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" href="#!">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
@@ -63,9 +62,9 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">租车人</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">车主</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">黑名单</a>
+                            <a class="nav-link" th:href="@{/admin/hirer_list}">租车人</a>
+                            <a class="nav-link" th:href="@{/admin/owner_list}">车主</a>
+                            <a class="nav-link" th:href="@{/admin/blacklist}">黑名单</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -86,10 +85,10 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">所有车辆</a>
-                                    <a class="nav-link" href="register.html">已租车辆</a>
-                                    <a class="nav-link" href="password.html">待租车辆</a>
-                                    <a class="nav-link" href="password.html">已下架车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list}">所有车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=1)}">已租车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=0)}">待租车辆</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2)}">已下架车辆</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -101,8 +100,9 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                  data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="401.html">上架</a>
-                                    <a class="nav-link" href="404.html">下架</a>
+                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2,opt='up')}">上架</a>
+                                    <a class="nav-link"
+                                       th:href="@{/admin/vehicle_list_rent(status=0,opt='down')}">下架</a>
                                 </nav>
                             </div>
                         </nav>
@@ -116,12 +116,12 @@
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">历史订单</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">当前订单</a>
+                            <a class="nav-link" th:href="@{/admin/all_order}">所有订单</a>
+                            <a class="nav-link" th:href="@{/admin/current_order}">当前订单</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">系统功能</div>
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
