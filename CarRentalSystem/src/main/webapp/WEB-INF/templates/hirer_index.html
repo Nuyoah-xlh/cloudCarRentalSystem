@@ -46,7 +46,7 @@
         </div>
         <div class="m-middle">
             <!--content-->
-            <p>确认将该辆车上架：</p>
+            <p>确认要租这辆车？</p>
             <p id="veh_info_"></p>
 
         </div>
@@ -93,79 +93,24 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <div class="sb-sidenav-menu-heading">数据</div>
-                    <a class="nav-link" th:href="@{/login/login_success}">
+                    <div class="sb-sidenav-menu-heading">租车</div>
+                    <a class="nav-link" th:href="@{/hirer/index}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        数据分析
+                        待租车辆
                     </a>
                     <div class="sb-sidenav-menu-heading">管理</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        用户管理
+                        历史订单
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                         data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/admin/hirer_list}">租车人</a>
-                            <a class="nav-link" th:href="@{/admin/owner_list}">车主</a>
-                            <a class="nav-link" th:href="@{/admin/blacklist}">黑名单</a>
-                        </nav>
-                    </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                        aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        车辆管理
+                        当前订单
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                         data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                               aria-controls="pagesCollapseAuth">
-                                查看车辆
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list}">所有车辆</a>
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=1)}">已租车辆</a>
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=0)}">待租车辆</a>
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2)}">已下架车辆</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#pagesCollapseError" aria-expanded="false"
-                               aria-controls="pagesCollapseError">
-                                车辆上/下架
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2,opt='up')}">上架</a>
-                                    <a class="nav-link"
-                                       th:href="@{/admin/vehicle_list_rent(status=0,opt='down')}">下架</a>
-                                </nav>
-                            </div>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
-                       aria-expanded="false" aria-controls="collapseLayouts2">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        订单管理
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
-                         data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/admin/all_order}">所有订单</a>
-                            <a class="nav-link" th:href="@{/admin/current_order}">当前订单</a>
-                        </nav>
-                    </div>
                     <div class="sb-sidenav-menu-heading">系统功能</div>
                     <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -173,7 +118,7 @@
                     </a>
                     <a class="nav-link" href="tables.html">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        平台收益
+                        个人信息
                     </a>
                 </div>
             </div>
@@ -207,7 +152,7 @@
                                 <th>位置</th>
                                 <th>最迟还车时间</th>
                                 <th>价格(元/天)</th>
-                                <th th:if="${opt}!=null">操作</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -216,12 +161,12 @@
                                 <th>型号</th>
                                 <th>车牌号</th>
                                 <th>车主用户名</th>
-                                <th>已租时长</th>
+                                <th>已租时长(小时)</th>
                                 <th>租赁状态</th>
                                 <th>位置</th>
                                 <th>最迟还车时间</th>
                                 <th>价格(元/天)</th>
-                                <th th:if="${opt}!=null">操作</th>
+                                <th>操作</th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -239,10 +184,10 @@
                                 <td th:text="${vehicle.LOCATION}"></td>
                                 <td th:text="${vehicle.DEADLINE}"></td>
                                 <td th:text="${vehicle.RENTAL_PRICE}"></td>
-                                <td th:if="${opt}!=null">
-                                    <a th:href="@{/admin/updateVehById(VEHICLE_ID=${vehicle.VEHICLE_ID},veh_status=${vehicle.STATUS==2?0:2},opt=${opt})}"
+                                <td>
+                                    <a th:href="@{/admin/rent(VEHICLE_ID=${vehicle.VEHICLE_ID})}"
                                        style="visibility:hidden;position: absolute;"></a>
-                                    <button class="btn1" th:text="${opt=='up'?'上架':'下架'}"></button>
+                                    <button class="btn1" th:text="租车">租车</button>
                                 </td>
                             </tr>
                             </tbody>

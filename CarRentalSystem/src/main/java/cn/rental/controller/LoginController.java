@@ -2,6 +2,8 @@ package cn.rental.controller;
 
 import cn.rental.bean.Login;
 import cn.rental.bean.UserInfo;
+import cn.rental.bean.Vehicle;
+import cn.rental.service.HirerService;
 import cn.rental.service.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private HirerService hirerService;
 
     //前往登录页
     @GetMapping("/toLogin")
@@ -69,6 +74,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         //判断已经登录验证通过
         if ("1".equals((String) httpSession.getAttribute("user_status"))) {
+            //管理员
             if ("0".equals(httpSession.getAttribute("user_type"))) {
                 List<UserInfo> hirer_list = loginService.getHirerOfVehicle();
                 List<UserInfo> owner_list = loginService.getOwnerOfVehicleInfo();
@@ -78,6 +84,12 @@ public class LoginController {
                 modelAndView.addObject("user_list", user_list);
                 modelAndView.addObject("user_name", httpSession.getAttribute("user_name"));
                 modelAndView.setViewName("admin_index");
+            }
+            //租车人
+            else if ("1".equals((String) httpSession.getAttribute("user_type"))) {
+                List<Vehicle> vehicleList = hirerService.getRentingVehicle();
+                modelAndView.addObject("vehicle_list", vehicleList);
+                modelAndView.setViewName("hirer_index");
             } else {
                 modelAndView.setViewName("404");
             }
