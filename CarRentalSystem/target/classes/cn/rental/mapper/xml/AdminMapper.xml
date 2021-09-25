@@ -8,11 +8,34 @@
                  NATURAL JOIN admin
     </select>
 
-    <!--getPerInfo-->
-    <select id="getPerInfo" resultType="UserInfo">
+    <!--getPerInfo_Admin-->
+    <select id="getPerInfo_Admin" resultType="UserInfo">
         SELECT USER_NAME, NAME, ID, ADMIN_ID
         FROM admin
         WHERE USER_NAME = #{USER_NAME}
+    </select>
+
+    <!--getPerInfo_Hirer-->
+    <select id="getPerInfo_Hirer" resultType="UserInfo">
+        SELECT USER_NAME, NAME, SEX, ID, TEL, CREDIT, EMAIL
+        FROM hirer_of_vehicle
+        WHERE USER_NAME = #{USER_NAME}
+    </select>
+
+    <!--getPerInfo_Owner-->
+    <select id="getPerInfo_Owner" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               ID,
+               TEL,
+               CREDIT,
+               EMAIL,
+               LOCATION
+        FROM owner_of_vehicle
+                 join vehicle
+        WHERE USER_NAME = #{USER_NAME}
+          and OWNER_ID = #{USER_NAME}
     </select>
 
     <!--getPerInfo-->
@@ -85,7 +108,6 @@
                RENTAL_PRICE,
                DEADLINE,
                LOCATION,
-               PIC_PATH,
                VEHICLE_BRAND
         FROM vehicle
     </select>
@@ -100,7 +122,6 @@
                RENTAL_PRICE,
                DEADLINE,
                LOCATION,
-               PIC_PATH,
                VEHICLE_BRAND
         FROM vehicle
         WHERE STATUS = #{STATUS}
@@ -141,7 +162,7 @@
                VEHICLE_ID,
                VEHICLE_BRAND
         FROM orders
-        WHERE STATUS != 2
+        WHERE STATUS != 3
     </select>
 
     <!--getMessageList-->

@@ -1,0 +1,122 @@
+body {
+    background-color: #333;
+}
+
+.reg_div {
+    margin: auto;
+    margin-top: 60px;
+    width: 500px;
+    height: 600px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.reg_div p {
+    padding: 30px 0px;
+    font-size: 30px;
+}
+
+.reg_ul {
+    width: 100%;
+}
+
+.reg_ul li {
+    margin: auto;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.reg_ul li span:nth-of-type(1) {
+    float: left;
+    margin: auto;
+    margin-left: 90px;
+    margin-top: 10px;
+}
+
+.reg_ul li span:nth-of-type(2) {
+    float: left;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.reg_ul li input:not(#male, #female, #owner, #rental) {
+    float: left;
+    width: 228px;
+    height: 30px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding-left: 20px;
+    outline: medium;
+    margin-left: 10px;
+}
+
+.reg_ul li button {
+    margin: auto;
+    color: #ffffff;
+    background-color: #333;
+    font-size: 16px;
+    padding: 10px 60px;
+    outline: inherit;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reg_ul li:nth-of-type(2) span:nth-of-type(1) {
+    margin-left: 105px;
+}
+
+.reg_ul li:nth-of-type(3) span:nth-of-type(1) {
+    margin-left: 105px;
+}
+
+.reg_ul li:nth-of-type(4) span:nth-of-type(1) {
+    margin-left: 70px;
+}
+
+.reg_ul li:nth-of-type(5) span:nth-of-type(1) {
+    margin-left: 100px;
+}
+
+.reg_ul li:nth-of-type(6) span:nth-of-type(1) {
+    margin-left: 68px;
+}
+
+.reg_ul li:nth-of-type(7) span:nth-of-type(1) {
+    margin-left: 68px;
+}
+
+.reg_ul li:nth-of-type(8) span:nth-of-type(1) {
+    margin-left: 95px;
+}
+
+.reg_ul li:nth-of-type(9) span:nth-of-type(1) {
+    margin-left: 65px;
+}
+
+.reg_ul li #male {
+    display: inline-block;
+    width: 30px;
+    margin-left: -200px;
+    margin-top: 10px;
+}
+
+.reg_ul li #female {
+    display: inline-block;
+    width: 30px;
+}
+
+.reg_ul li #rental {
+    display: inline-block;
+    width: 30px;
+    margin-left: -130px;
+    margin-top: 10px;
+}
+
+.reg_ul li #owner {
+    display: inline-block;
+    width: 30px;
+}

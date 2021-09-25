@@ -236,10 +236,9 @@
     </div>
     <!--    显示信息-->
     <div id="layoutSidenav_content">
-        <form th:action="@{/admin/msgReply}" method="post">
+        <form th:action="@{/hirer/msgReply}" method="post">
             <label id="user_name_">接收方：</label><input type="text" name="receive" id="user_name"
-                                                      th:value="${receive}"
-                                                      th:placeholder="${receive}"/><span
+                                                      th:placeholder="${receive}!=null?${receive}:''"/><span
                 class="spa spa3"></span><br/>
             <label id="username_">发送方：</label><input type="text" name="send" id="username"
                                                      th:value="${session.user_name}"

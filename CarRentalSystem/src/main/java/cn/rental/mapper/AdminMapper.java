@@ -9,7 +9,13 @@ public interface AdminMapper {
     public List<AdminInfo> getAdminInfos();
 
     //根据用户名查询个人信息
-    public UserInfo getPerInfo(String USER_NAME);
+    public UserInfo getPerInfo_Admin(String USER_NAME);
+
+    //根据用户名查询个人信息
+    public UserInfo getPerInfo_Hirer(String USER_NAME);
+
+    //根据用户名查询个人信息
+    public UserInfo getPerInfo_Owner(String USER_NAME);
 
     //查询所有租车人信息
     public List<Hirer> getHirerList();

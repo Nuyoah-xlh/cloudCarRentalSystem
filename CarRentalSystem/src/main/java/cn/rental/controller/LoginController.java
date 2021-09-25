@@ -6,6 +6,7 @@ import cn.rental.bean.Vehicle;
 import cn.rental.service.HirerService;
 import cn.rental.service.LoginService;
 
+import cn.rental.util.BASE64Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +52,10 @@ public class LoginController {
         } else {
             type = 2;
         }
-        System.out.println(user_name + password + user_type + name);
+        System.out.println("解密前：" + user_name + password + user_type + name);
+        //对密码进行解密
+        password = BASE64Util.decode(password);
+        System.out.println("解密后：" + user_name + password + user_type + name);
         //数据库进行查询该用户
         Login one = loginService.findOne(user_name);
         System.out.println(one);

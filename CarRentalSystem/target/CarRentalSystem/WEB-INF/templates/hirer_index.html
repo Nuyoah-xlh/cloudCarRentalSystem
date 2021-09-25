@@ -15,23 +15,44 @@
     <script>
         $(document).ready(function () {
             var cli;
-            // alert('11111');
+            alert('11111');
             var m1 = new MyModal.modal(function () {
-                alert("操作成功！");
-                cli.click();
+                // alert("已发送租车请求！");
+                // cli.click();
+                const brand = document.getElementById("brand").value;
+                const tp = document.getElementById("tp").value;
+                const v_id = document.getElementById("v_id").value;
+                const owner = document.getElementById("owner").value;
+                $.ajax({
+                    url: '[[@{/hirer/to_rent}]]',
+                    type: 'POST',
+                    data: {
+                        brand: brand,
+                        tp: tp,
+                        v_id: v_id,
+                        owner: owner
+                    },
+                    async: true,
+                    success: function (data) {
+                        if (data == 'true') {
+                            alert("租车请求已发送，等待车主确认...");
+                            cli.click();
+                        } else {
+                            alert("您有未完成的订单，暂不可发起租车！");
+                        }
+                    }
+                });
             });
-            $("table td .btn1").click(function () {
+            $(".btn1").click(function () {
+                cli = $(this).siblings("a")[0];
                 var res = $(this).parent().siblings(".veh_info").text();
                 $("#veh_info_").html(res);
                 m1.show();
-                cli = $(this).siblings("a")[0];
-                // alert(q);
+                // alert(111);
             });
-            // $(".btn1").click(function () {
-            //     m1.show();
-            //     var q = $(this).siblings("a").text();
-            //     alert(q);
-            // })
+            // cli = $(this).siblings("a")[0];
+            // alert(q);
+
         });
     </script>
 </head>
@@ -99,26 +120,26 @@
                         待租车辆
                     </a>
                     <div class="sb-sidenav-menu-heading">管理</div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-                       aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link" th:href="@{/hirer/all_orders}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        历史订单
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        我的订单
                     </a>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                       aria-expanded="false" aria-controls="collapsePages">
+                    <a class="nav-link" th:href="@{/hirer/current_orders}">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         当前订单
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="sb-sidenav-menu-heading">系统功能</div>
-                    <a class="nav-link" th:href="@{/admin/message_list}">
+                    <a class="nav-link" th:href="@{/hirer/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" th:href="@{/hirer/to_send}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        个人信息
+                        发送留言
+                    </a>
+                    <a class="nav-link" th:href="@{/hirer/toAdmin}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        联系管理员
                     </a>
                 </div>
             </div>
@@ -171,10 +192,10 @@
                             </tfoot>
                             <tbody>
                             <tr th:each="vehicle: ${vehicle_list}">
-                                <td th:text="${vehicle.VEHICLE_BRAND}+'&nbsp;'" class="veh_info"></td>
-                                <td th:text="${vehicle.VEHICLE_TYPE}+'&nbsp;'" class="veh_info"></td>
-                                <td th:text="${vehicle.VEHICLE_ID}+'&nbsp;'" class="veh_info"></td>
-                                <td th:text="${vehicle.OWNER_ID}"></td>
+                                <td th:text="${vehicle.VEHICLE_BRAND}+'&nbsp;'" class="veh_info" id="brand"></td>
+                                <td th:text="${vehicle.VEHICLE_TYPE}+'&nbsp;'" class="veh_info" id="tp"></td>
+                                <td th:text="${vehicle.VEHICLE_ID}+'&nbsp;'" class="veh_info" id="v_id"></td>
+                                <td th:text="${vehicle.OWNER_ID}" id="owner"></td>
                                 <td th:text="${vehicle.DURATION}"></td>
                                 <td th:switch="${vehicle.STATUS}">
                                     <span th:case="0">在租</span>
@@ -212,13 +233,13 @@
 <!--<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>-->
 <!--<script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>-->
 
-<script th:src="@{/static/login/bootstrap.bundle.min.js}"
-        crossorigin="anonymous"></script>
+<!--<script th:src="@{/static/login/bootstrap.bundle.min.js}"-->
+<!--        crossorigin="anonymous"></script>-->
 <script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>
 <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/scripts.js}"></script>
-<script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>
-<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>
-<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>
+<!--<script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>-->
+<!--<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>-->
+<!--<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>-->
 <script th:src="@{/static/login/simple-datatables@latest.js}" crossorigin="anonymous"></script>
 <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js}"></script>
 </body>

@@ -1,88 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Register - SB Admin</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">First name</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Last name</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 重置文件 -->
+    <link rel="stylesheet" th:href="@{/static/register/normalize.css}">
+    <link rel="stylesheet" th:href="@{/static/register/style.css}">
+    <title>注册</title>
+    <!--    用于加密的js-->
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/static/jQuery/jquery.base64.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".red_button").click(function () {
+                const user_name = $("input[name='user_name']")[0].value;
+                const name = $("input[name='name']")[0].value;
+                const password = $("input[name='password']")[0].value;
+                const encode = $.base64.encode(password);
+                const sex = $("input[type='radio']:checked")[0].value;
+                const id = $("input[name='id']")[0].value;
+                const email = $("input[name='email']")[0].value;
+                const tel = $("input[name='tel']")[0].value;
+                const tp = $("input[type='radio']:checked")[1].value;
+                const confirm = $("input[name='confirm']")[0].value;
+                // 方便起见，只要不空就可
+                if (user_name != "" && name != "" && password != "" && sex != "" && id != "" && email != "" && tel != "" && tp != "" && tp != "" && confirm != "" && password == confirm) {
+                    var r = confirm("确定要注册吗？");
+                    if (r == true) {
+                        $.ajax({
+                            url: '[[@{/register/add}]]',
+                            type: 'POST',
+                            data: {
+                                user_name: user_name,
+                                name: name,
+                                password: encode,
+                                sex: sex,
+                                id: id,
+                                email: email,
+                                tel: tel,
+                                tp: tp
+                            },
+                            async: true,
+                            success: function (data) {
+                                if (data == 'true') {
+                                    alert("注册成功！");
+                                    document.getElementById("hid").click();
+                                } else {
+                                    alert("用户名已存在！");
+                                }
+                            }
+                        });
+                    } else {
+                        console.log("取消");
+                    }
+                } else {
+                    alert("请完善信息后再提交！");
+                }
+            });
+
+        });
+    </script>
+
+</head>
+
+<body>
+<div class="reg_div">
+    <p>注册</p>
+    <ul class="reg_ul">
+        <li>
+            <span>用户名：</span>
+            <input type="text" name="user_name" value="" placeholder="请输入用户名" class="reg_user">
+            <span class="user_hint"></span>
+        </li>
+        <li>
+            <span>姓名：</span>
+            <input type="text" name="name" value="" placeholder="请输入姓名" class="reg_user">
+            <span class="reg_user"></span>
+        </li>
+        <li>
+            <span>性别：</span>
+            <input id="male" type="radio" value="1" name="sex">
+            <label for="male">男</label>
+            <input id="female" type="radio" value="0" name="sex">
+            <label for="female">女</label>
+        </li>
+        <li>
+            <span>身份证号：</span>
+            <input type="text" name="id" value="" placeholder="请输入身份证号"/>
+            <span class="user_hint"></span>
+        </li>
+        <li>
+            <span>邮箱：</span>
+            <input type="text" name="email" value="" placeholder="请输入邮箱地址" class="reg_email">
+            <span class="email_hint"></span>
+        </li>
+        <li>
+            <span>手机号码：</span>
+            <input type="text" name="tel" value="" placeholder="请输入手机号码" class="reg_mobile">
+            <span class="mobile_hint"></span>
+        </li>
+        <li>
+            <span>用户类别：</span>
+            <input id="rental" type="radio" value="1" name="tp">
+            <label for="rental">租车人</label>
+            <input id="owner" type="radio" value="2" name="tp">
+            <label for="owner">车主</label>
+        </li>
+        <li>
+            <span>密码：</span>
+            <input type="password" name="password" value="" placeholder="请输入密码" class="reg_password">
+            <span class="password_hint"></span>
+        </li>
+        <li>
+            <span>确认密码：</span>
+            <input type="password" name="confirm" value="" placeholder="请再次确认密码" class="reg_confirm">
+            <span class="confirm_hint"></span>
+        </li>
+        <li>
+            <button type="button" name="button" class="red_button">注册</button>
+        </li>
+    </ul>
+</div>
+<a id="hid" th:href="@{/login/toLogin}" style="display: none;"></a>
+</body>
 </html>

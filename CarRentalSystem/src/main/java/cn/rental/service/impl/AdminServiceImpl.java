@@ -25,9 +25,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserInfo getPerInfo(String USER_NAME) {
+    public UserInfo getPerInfo_Admin(String USER_NAME) {
         try {
-            return adminMapper.getPerInfo(USER_NAME);
+            return adminMapper.getPerInfo_Admin(USER_NAME);
         } catch (Exception e) {
             System.out.println(e);
             return null;

@@ -10,10 +10,125 @@
                RENTAL_PRICE,
                DEADLINE,
                LOCATION,
-               PIC_PATH,
                VEHICLE_BRAND
         FROM vehicle
         WHERE STATUS = 0
     </select>
+
+    <select id="getOrdersByStatus" resultType="Order">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        FROM orders
+        WHERE HIRER_NAME = #{HIRER_NAME}
+          AND STATUS = #{STATUS}
+    </select>
+
+    <insert id="addOneOrder" parameterType="Order">
+        INSERT INTO orders(OWNER_NAME, HIRER_NAME, VEHICLE_TYPE, STATUS, VEHICLE_ID, VEHICLE_BRAND)
+        VALUES (#{OWNER_NAME}, #{HIRER_NAME}, #{VEHICLE_TYPE}, #{STATUS}, #{VEHICLE_ID}, #{VEHICLE_BRAND})
+    </insert>
+
+    <select id="getAllOrders" resultType="Order" parameterType="Hirer">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where HIRER_NAME = #{USER_NAME}
+    </select>
+
+    <select id="getCurrentOrders" resultType="Order" parameterType="Hirer">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where HIRER_NAME = #{USER_NAME}
+          and (STATUS != 3);
+    </select>
+
+    <update id="cancel" parameterType="Order">
+        UPDATE orders
+        SET STATUS=3
+        WHERE ORDER_ID = #{ORDER_ID}
+    </update>
+
+    <update id="over" parameterType="Order">
+        UPDATE orders
+        SET STATUS=2,
+            AMOUNT=#{AMOUNT},
+            END_TIME=#{END_TIME}
+        WHERE ORDER_ID = #{ORDER_ID}
+    </update>
+
+    <select id="getOrderById" parameterType="Order" resultType="Order">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where ORDER_ID = #{ORDER_ID}
+    </select>
+
+    <select id="getVehicleById" parameterType="Vehicle" resultType="Vehicle">
+        SELECT VEHICLE_ID,
+               VEHICLE_TYPE,
+               OWNER_ID,
+               DURATION,
+               STATUS,
+               RENTAL_PRICE,
+               DEADLINE,
+               LOCATION,
+               VEHICLE_BRAND
+        FROM vehicle
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </select>
+
+    <!--getMessageList-->
+    <select id="getMessageList" resultType="Message" parameterType="Hirer">
+        SELECT MESSAGE_ID, SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS
+        FROM message
+        WHERE SEND_NAME = #{USER_NAME}
+           OR RECEIVE_NAME = #{USER_NAME}
+    </select>
+
+    <!--updateMsgStatus-->
+    <update id="updateMsgStatus" parameterType="Message">
+        UPDATE message
+        set STATUS = 1
+        WHERE MESSAGE_ID = #{MESSAGE_ID}
+    </update>
+
+    <!--addMsg-->
+    <insert id="addMsg" parameterType="Message">
+        INSERT INTO message(SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS)
+        VALUES (#{SEND_NAME}, #{RECEIVE_NAME}, #{DETAIL}, #{SEND_TIME}, #{STATUS})
+    </insert>
 
 </mapper>

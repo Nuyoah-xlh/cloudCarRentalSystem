@@ -18,7 +18,7 @@
             var send;
             var m1 = new MyModal.modal(function () {
                 $.ajax({
-                    url: '[[@{/admin/updateMsgStatus}]]',
+                    url: '[[@{/hirer/updateMsgStatus}]]',
                     type: 'GET',
                     data: {
                         MESSAGE_ID: MESSAGE_ID,
@@ -31,11 +31,11 @@
                 })
             });
             $("table td .btn1").click(function () {
+                MESSAGE_ID = $(this).parent().siblings(".msg_id").text();
+                send = $(this).parent().siblings(".send").text();
                 var res = $(this).parent().siblings(".detail").text();
                 $("#msg_info_").html("&nbsp;&nbsp;" + res);
                 m1.show();
-                MESSAGE_ID = $(this).parent().siblings(".msg_id").text();
-                send = $(this).parent().siblings(".send").text();
             });
 
             $("table td .btn2").click(function () {
@@ -246,7 +246,7 @@
                                     <button class="btn1">查看</button>
                                 </td>
                                 <td>
-                                    <a th:href="@{/admin/toMsgReply(receive=${message.SEND_NAME}==${session.user_name}?${message.RECEIVE_NAME}:${session.user_name})}"
+                                    <a th:href="@{/hirer/toMsgReply(receive=${message.SEND_NAME}==${session.user_name}?${message.RECEIVE_NAME}:${session.user_name})}"
                                        style="visibility:hidden;position: absolute;"></a>
                                     <button class="btn2">回复</button>
                                 </td>

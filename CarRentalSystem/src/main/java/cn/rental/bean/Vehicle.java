@@ -12,13 +12,12 @@ public class Vehicle {
     private double RENTAL_PRICE;
     private Date DEADLINE;
     private String LOCATION;
-    private String PIC_PATH;
 
     public Vehicle() {
 
     }
 
-    public Vehicle(String VEHICLE_ID, String VEHICLE_TYPE, String VEHICLE_BRAND, String OWNER_ID, int DURATION, int STATUS, double RENTAL_PRICE, Date DEADLINE, String LOCATION, String PIC_PATH) {
+    public Vehicle(String VEHICLE_ID, String VEHICLE_TYPE, String VEHICLE_BRAND, String OWNER_ID, int DURATION, int STATUS, double RENTAL_PRICE, Date DEADLINE, String LOCATION) {
         this.VEHICLE_ID = VEHICLE_ID;
         this.VEHICLE_TYPE = VEHICLE_TYPE;
         this.VEHICLE_BRAND = VEHICLE_BRAND;
@@ -28,7 +27,6 @@ public class Vehicle {
         this.RENTAL_PRICE = RENTAL_PRICE;
         this.DEADLINE = DEADLINE;
         this.LOCATION = LOCATION;
-        this.PIC_PATH = PIC_PATH;
     }
 
     public String getVEHICLE_ID() {
@@ -103,11 +101,4 @@ public class Vehicle {
         this.LOCATION = LOCATION;
     }
 
-    public String getPIC_PATH() {
-        return PIC_PATH;
-    }
-
-    public void setPIC_PATH(String PIC_PATH) {
-        this.PIC_PATH = PIC_PATH;
-    }
 }

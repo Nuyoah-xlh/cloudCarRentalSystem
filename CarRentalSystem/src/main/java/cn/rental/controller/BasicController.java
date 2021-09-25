@@ -30,13 +30,13 @@ public class BasicController {
             UserInfo userInfo;
             if ("0".equals(user_type)) {
                 //获取个人详细信息
-                userInfo = adminService.getPerInfo((String) httpSession.getAttribute("user_name"));
+                userInfo = adminService.getPerInfo_Admin((String) httpSession.getAttribute("user_name"));
             } else if ("1".equals(user_type)) {
                 // 获取租车人信息(待填充)
-                userInfo = adminService.getPerInfo((String) httpSession.getAttribute("user_name"));
+                userInfo = adminService.getPerInfo_Admin((String) httpSession.getAttribute("user_name"));
             } else {
                 //获取车主信息（待填充)
-                userInfo = adminService.getPerInfo((String) httpSession.getAttribute("user_name"));
+                userInfo = adminService.getPerInfo_Admin((String) httpSession.getAttribute("user_name"));
             }
             userInfo.setUSER_TYPE(user_type);
             modelAndView.addObject("personInfo", userInfo);

@@ -1,6 +1,7 @@
 package cn.rental.bean;
 
-import lombok.Data;
+
+import java.util.Date;
 
 //@Data
 public class Login {
@@ -9,14 +10,14 @@ public class Login {
     private String LAST_TIME;
     private int TIMES;
     private int STATE;
-    private String REGISTER_TIME;
+    private Date REGISTER_TIME;
     private int USER_TYPE;
 
     public Login() {
 
     }
 
-    public Login(String USER_NAME, String PASSWORD, String LAST_TIME, int TIMES, int STATE, String REGISTER_TIME, int USER_TYPE) {
+    public Login(String USER_NAME, String PASSWORD, String LAST_TIME, int TIMES, int STATE, Date REGISTER_TIME, int USER_TYPE) {
         this.USER_NAME = USER_NAME;
         this.PASSWORD = PASSWORD;
         this.LAST_TIME = LAST_TIME;
@@ -66,11 +67,11 @@ public class Login {
         this.STATE = STATE;
     }
 
-    public String getREGISTER_TIME() {
+    public Date getREGISTER_TIME() {
         return REGISTER_TIME;
     }
 
-    public void setREGISTER_TIME(String REGISTER_TIME) {
+    public void setREGISTER_TIME(Date REGISTER_TIME) {
         this.REGISTER_TIME = REGISTER_TIME;
     }
 

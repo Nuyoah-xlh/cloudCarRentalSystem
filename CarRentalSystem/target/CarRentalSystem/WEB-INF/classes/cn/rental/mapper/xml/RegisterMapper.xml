@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rental.mapper.RegisterMapper">
+
+    <!--addOne-->
+    <insert id="addOne" parameterType="Login">
+        insert into login(USER_NAME, PASSWORD, TIMES, STATE, USER_TYPE, REGISTER_TIME)
+        values (#{USER_NAME}, #{PASSWORD}, #{TIMES}, #{STATE}, #{USER_TYPE}, #{REGISTER_TIME});
+    </insert>
+
+
+    <insert id="addOneOwner" parameterType="Owner">
+        insert into owner_of_vehicle(USER_NAME, NAME, SEX, ID, CREDIT, FREQUENCY, TEL, EMAIL, INCOME)
+        values (#{USER_NAME}, #{NAME}, #{SEX}, #{ID}, #{CREDIT}, #{FREQUENCY}, #{TEL}, #{EMAIL}, #{INCOME});
+    </insert>
+
+    <insert id="addOneHirer" parameterType="Hirer">
+        insert into hirer_of_vehicle(USER_NAME, NAME, SEX, ID, CREDIT, FREQUENCY, EMAIL, TEL)
+        values (#{USER_NAME}, #{NAME}, #{SEX}, #{ID}, #{CREDIT}, #{FREQUENCY}, #{EMAIL}, #{TEL});
+    </insert>
+
+
+</mapper>

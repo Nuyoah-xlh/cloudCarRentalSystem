@@ -263,7 +263,7 @@
                 th:if="${personInfo.USER_TYPE}!=0" type="text" name="userphone" id="userphone"
                 th:value="${personInfo.TEL}"
                 th:placeholder="${personInfo.TEL}"/><span class="spa spa2"></span><br/>
-            <label id="address_" th:if="${personInfo.USER_TYPE}!=0">地&nbsp;址：</label><input
+            <label id="address_" th:if="${personInfo.USER_TYPE}==2">地&nbsp;址：</label><input
                 th:if="${personInfo.USER_TYPE}!=0" type="text" name="address" id="address"
                 th:value="${personInfo.LOCATION}"
                 th:placeholder="${personInfo.LOCATION}"/><span class="spa spa3"></span><br/>

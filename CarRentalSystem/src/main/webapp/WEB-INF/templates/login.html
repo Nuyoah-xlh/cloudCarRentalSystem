@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/static/login/all.min.css}">
     <link rel="stylesheet" th:href="@{/static/login/style.css}">
     <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <!--    用于加密的js-->
+    <script th:src="@{/static/jQuery/jquery.base64.js}"></script>
 
 
     <script>
@@ -14,13 +16,14 @@
             $("#login").click(function () {
                 const user_name = document.getElementById("user_name").value;
                 const password = document.getElementById("password").value;
+                var encode = $.base64.encode(password);
                 const user_type = document.getElementById("user_type").value;
                 $.ajax({
                     url: '[[@{/login/toIndex}]]',
                     type: 'POST',
                     data: {
                         user_name: user_name,
-                        password: password,
+                        password: encode,
                         user_type: user_type
                     },
                     async: true,

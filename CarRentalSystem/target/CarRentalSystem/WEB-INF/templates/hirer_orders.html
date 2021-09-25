@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>云租车系统</title>
+    <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
+    <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/static/modal/css/jquery.my-modal.1.1.winStyle.css}" rel="stylesheet"/>
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $("table td .btn1").click(function () {
+                    var s = confirm("确定要终止当前订单吗？");
+                    if (s == true) {
+                        $(this).siblings("a")[0].click();
+                    }
+                }
+            );
+        });
+    </script>
+</head>
+<body class="sb-nav-fixed">
+<!--模态框-->
+<div class="m-modal">
+    <div class="m-modal-dialog">
+        <div class="m-top">
+            <h4 class="m-modal-title">
+            </h4>
+            <span class="m-modal-close">&times;</span>
+        </div>
+        <div class="m-middle">
+            <!--content-->
+            <p>确认要租这辆车？</p>
+            <p id="veh_info_"></p>
+
+        </div>
+        <div class="m-bottom">
+            <button class="m-btn-sure">确定</button>
+            <button class="m-btn-cancel">取消</button>
+        </div>
+    </div>
+
+</div>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="#">云 租 车 系 统</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="搜 索" aria-label="Search for..."
+                   aria-describedby="btnNavbarSearch"/>
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- 个人设置-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
+                <li><a class="dropdown-item" href="#!">注销账号</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <!--侧边栏-->
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">租车</div>
+                    <a class="nav-link" th:href="@{/hirer/index}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        待租车辆
+                    </a>
+                    <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link" th:href="@{/hirer/index}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        我的订单
+                    </a>
+                    <a class="nav-link" th:href="@{/hirer/index}" id="hid">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        当前订单
+                    </a>
+                    <div class="sb-sidenav-menu-heading">系统功能</div>
+                    <a class="nav-link" th:href="@{/admin/message_list}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        我的留言
+                    </a>
+                    <a class="nav-link" href="tables.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        个人信息
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">已登录:</div>
+                <a th:href="@{/basic/perInfo}" th:text="${session.user_name}"></a>
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">订单信息</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">订单</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i> 订单信息表
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>车辆品牌</th>
+                                <th>车型</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>租车人用户名</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>费用</th>
+                                <th>订单状态</th>
+                                <th th:if="${para}==1">操作</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>订单号</th>
+                                <th>车辆品牌</th>
+                                <th>车型</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>租车人用户名</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>费用</th>
+                                <th>订单状态</th>
+                                <th th:if="${para}==1">操作</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="order: ${orderList}">
+                                <td th:text="${order.ORDER_ID}"></td>
+                                <td th:text="${order.VEHICLE_BRAND}"></td>
+                                <td th:text="${order.VEHICLE_TYPE}"></td>
+                                <td th:text="${order.VEHICLE_ID}"></td>
+                                <td th:text="${order.OWNER_NAME}"></td>
+                                <td th:text="${order.HIRER_NAME}"></td>
+                                <td th:text="${order.STATUS}!=0?${#dates.format(order.START_TIME,'yyyy-MM-dd HH:mm')}:'---'"></td>
+                                <td th:text="${order.STATUS}>=2?${#dates.format(order.END_TIME,'yyyy-MM-dd HH:mm')}:'---'"></td>
+                                <td th:text="${order.STATUS}>=2?${order.AMOUNT}:'---'"></td>
+                                <td th:switch="${order.STATUS}">
+                                    <span th:case="0">待开始</span>
+                                    <span th:case="1">正在进行</span>
+                                    <span th:case="2">正在还车</span>
+                                    <span th:case="3">已结束</span>
+                                </td>
+                                <td th:if="${para}==1">
+                                    <a th:href="@{/hirer/cancel(ORDER_ID=${order.ORDER_ID},STATUS=${order.STATUS},VEHICLE_ID=${order.VEHICLE_ID})}"
+                                       style="visibility:hidden;position: absolute;"></a>
+                                    <button th:if="${order.STATUS}<2" class="btn1" th:text="结束订单"></button>
+                                    <span th:if="${order.STATUS}>1">---</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; 云租车平台 2021</div>
+                    <div>
+                        <a href="#">隐私政策</a> &middot;
+                        <a href="#">条件 &amp; 条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!--<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>-->
+<!--<script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>-->
+
+<script th:src="@{/static/login/bootstrap.bundle.min.js}"
+        crossorigin="anonymous"></script>
+<script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/scripts.js}"></script>
+<script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>
+<script th:src="@{/static/login/simple-datatables@latest.js}" crossorigin="anonymous"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js}"></script>
+</body>
+</html>

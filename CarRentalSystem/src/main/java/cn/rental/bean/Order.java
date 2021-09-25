@@ -22,7 +22,6 @@ public class Order {
         this.OWNER_NAME = OWNER_NAME;
         this.HIRER_NAME = HIRER_NAME;
         this.START_TIME = START_TIME;
-        this.END_TIME = END_TIME;
         this.VEHICLE_TYPE = VEHICLE_TYPE;
         this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
@@ -108,5 +107,21 @@ public class Order {
 
     public void setVEHICLE_BRAND(String VEHICLE_BRAND) {
         this.VEHICLE_BRAND = VEHICLE_BRAND;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "ORDER_ID=" + ORDER_ID +
+                ", OWNER_NAME='" + OWNER_NAME + '\'' +
+                ", HIRER_NAME='" + HIRER_NAME + '\'' +
+                ", START_TIME=" + START_TIME +
+                ", END_TIME=" + END_TIME +
+                ", VEHICLE_TYPE='" + VEHICLE_TYPE + '\'' +
+                ", STATUS=" + STATUS +
+                ", AMOUNT=" + AMOUNT +
+                ", VEHICLE_ID='" + VEHICLE_ID + '\'' +
+                ", VEHICLE_BRAND='" + VEHICLE_BRAND + '\'' +
+                '}';
     }
 }
