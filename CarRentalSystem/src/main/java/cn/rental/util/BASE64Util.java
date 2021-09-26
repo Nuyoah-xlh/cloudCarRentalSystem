@@ -5,6 +5,7 @@ import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 
+
 /**
  * BASE64算法工具类,该算法封装了对字符串,
  * 字节数组的加密和字符串解密的功能.

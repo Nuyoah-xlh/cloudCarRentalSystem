@@ -150,4 +150,70 @@ public class AdminServiceImpl implements AdminService {
             System.out.println(e);
         }
     }
+
+    @Override
+    public List<Login> getLoginLog() {
+        try {
+            return adminMapper.getLoginLog();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public void toBlackList1(Hirer hirer) {
+        try {
+            adminMapper.toBlackList1(hirer);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void toBlackList2(Owner owner) {
+        try {
+            adminMapper.toBlackList2(owner);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void outBlackList1(Hirer hirer) {
+        try {
+            adminMapper.outBlackList1(hirer);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void outBlackList2(Owner owner) {
+        try {
+            adminMapper.outBlackList2(owner);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public UserInfo getPerInfo_Hirer(String USER_NAME) {
+        try {
+            return adminMapper.getPerInfo_Hirer(USER_NAME);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserInfo> getPerInfo_Owner(String USER_NAME) {
+        try {
+            return adminMapper.getPerInfo_Owner(USER_NAME);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 }

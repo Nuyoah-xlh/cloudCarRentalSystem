@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 重置文件 -->
+    <link rel="stylesheet" th:href="@{/static/register/normalize.css}">
+    <link rel="stylesheet" th:href="@{/static/add_vehicle/style.css}">
+    <title>增加/修改车辆信息</title>
+    <!--    用于加密的js-->
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".red_button").click(function () {
+                const VEHICLE_ID = $("input[name='VEHICLE_ID']")[0].value;
+                const VEHICLE_BRAND = $("input[name='VEHICLE_BRAND']")[0].value;
+                const VEHICLE_TYPE = $("input[name='VEHICLE_TYPE']")[0].value;
+                const time = $("input[name='time']")[0].value;
+                const RENTAL_PRICE = $("input[name='RENTAL_PRICE']")[0].value;
+                const LOCATION = $("input[name='LOCATION']")[0].value;
+                // 方便起见，只要不空就可
+                if (VEHICLE_ID != "" && VEHICLE_BRAND != "" && VEHICLE_TYPE != "" && time != "" && RENTAL_PRICE != "" && LOCATION != "") {
+                    var r = confirm("确定要提交吗？");
+                    if (r == true) {
+                        $.ajax({
+                            url: '[[@{/owner/add}]]',
+                            type: 'POST',
+                            data: {
+                                VEHICLE_ID: VEHICLE_ID,
+                                VEHICLE_BRAND: VEHICLE_BRAND,
+                                VEHICLE_TYPE: VEHICLE_TYPE,
+                                time: time,
+                                RENTAL_PRICE: RENTAL_PRICE,
+                                LOCATION: LOCATION
+                            },
+                            async: true,
+                            success: function (data) {
+                                if (data == 'true') {
+                                    alert("提交成功！");
+                                    document.getElementById("hid").click();
+                                } else {
+                                    alert("用户名已存在！");
+                                }
+                            }
+                        });
+                    } else {
+                        console.log("取消");
+                    }
+                } else {
+                    alert("请完善信息后再提交！");
+                }
+            });
+
+        });
+    </script>
+
+</head>
+
+<body>
+<div class="reg_div">
+    <p>新增/修改车辆信息</p>
+    <ul class="reg_ul">
+        <li>
+            <span>车牌号：</span>
+            <input type="text" name="VEHICLE_ID" value="" placeholder="请输入车牌号">
+            <span class="user_hint"></span>
+        </li>
+        <li>
+            <span>车辆厂商：</span>
+            <input type="text" name="VEHICLE_BRAND" value="" placeholder="请输入车辆厂商">
+            <span class="reg_user"></span>
+        </li>
+        <li>
+            <span>车型：</span>
+            <input type="text" name="VEHICLE_TYPE" value="" placeholder="请输入车型"/>
+            <span class="user_hint"></span>
+        </li>
+        <li>
+            <span>最晚还车时间：</span>
+            <input type="datetime-local" name="time"/>
+            <span class="email_hint"></span>
+        </li>
+        <li>
+            <span>出租单价：</span>
+            <input type="number" name="RENTAL_PRICE" value="" placeholder="请输入出租单价（元/小时）">
+            <span class="mobile_hint"></span>
+        </li>
+        <li>
+            <span>所在地：</span>
+            <input type="text" name="LOCATION" value="" placeholder="请输入车辆所在地">
+            <span class="password_hint"></span>
+        </li>
+        <li>
+            <button type="button" name="button" class="red_button">提交</button>
+        </li>
+    </ul>
+</div>
+<a id="hid" th:href="@{/owner/index}" style="display: none;"></a>
+</body>
+</html>

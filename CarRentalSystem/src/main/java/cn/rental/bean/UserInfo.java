@@ -14,6 +14,7 @@ public class UserInfo {
     private String ID;
     private String LOCATION;
     private int FREQUENCY;
+    private String PASSWORD;
 
     public UserInfo() {
 
@@ -137,5 +138,13 @@ public class UserInfo {
 
     public void setFREQUENCY(int FREQUENCY) {
         this.FREQUENCY = FREQUENCY;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
+    }
+
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
     }
 }

@@ -1,13 +1,14 @@
 package cn.rental.bean;
 
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 //@Data
 public class Login {
     private String USER_NAME;
     private String PASSWORD;
-    private String LAST_TIME;
+    private Date LAST_TIME;
     private int TIMES;
     private int STATE;
     private Date REGISTER_TIME;
@@ -17,7 +18,7 @@ public class Login {
 
     }
 
-    public Login(String USER_NAME, String PASSWORD, String LAST_TIME, int TIMES, int STATE, Date REGISTER_TIME, int USER_TYPE) {
+    public Login(String USER_NAME, String PASSWORD, Date LAST_TIME, int TIMES, int STATE, Date REGISTER_TIME, int USER_TYPE) {
         this.USER_NAME = USER_NAME;
         this.PASSWORD = PASSWORD;
         this.LAST_TIME = LAST_TIME;
@@ -43,11 +44,11 @@ public class Login {
         this.PASSWORD = PASSWORD;
     }
 
-    public String getLAST_TIME() {
+    public Date getLAST_TIME() {
         return LAST_TIME;
     }
 
-    public void setLAST_TIME(String LAST_TIME) {
+    public void setLAST_TIME(Date LAST_TIME) {
         this.LAST_TIME = LAST_TIME;
     }
 

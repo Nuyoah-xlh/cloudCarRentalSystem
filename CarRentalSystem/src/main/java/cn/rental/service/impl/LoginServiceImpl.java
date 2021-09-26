@@ -46,4 +46,31 @@ public class LoginServiceImpl implements LoginService {
             return null;
         }
     }
+
+    @Override
+    public void modify(UserInfo userInfo) {
+        try {
+            loginMapper.modify(userInfo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateLog(Login login) {
+        try {
+            loginMapper.updateLog(login);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateStatus(Login login) {
+        try {
+            loginMapper.updateStatus(login);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

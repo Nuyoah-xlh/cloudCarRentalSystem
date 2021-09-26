@@ -1,9 +1,6 @@
 package cn.rental.service.impl;
 
-import cn.rental.bean.Hirer;
-import cn.rental.bean.Message;
-import cn.rental.bean.Order;
-import cn.rental.bean.Vehicle;
+import cn.rental.bean.*;
 import cn.rental.mapper.HirerMapper;
 import cn.rental.service.HirerService;
 import org.apache.ibatis.executor.ReuseExecutor;
@@ -129,6 +126,34 @@ public class HirerServiceImpl implements HirerService {
     public void addMsg(Message message) {
         try {
             hirerMapper.addMsg(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public UserInfo getInfo(String USER_NAME) {
+        try {
+            return hirerMapper.getInfo(USER_NAME);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public void updateCredit(Hirer hirer) {
+        try {
+            hirerMapper.updateCredit(hirer);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateDuration(Vehicle vehicle) {
+        try {
+            hirerMapper.updateDuration(vehicle);
         } catch (Exception e) {
             System.out.println(e);
         }

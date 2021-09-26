@@ -31,12 +31,12 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}">个人信息</a></li>
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/toModify}">修改密码</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
@@ -125,10 +125,6 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        平台收益
-                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
@@ -188,7 +184,7 @@
                                 <td th:text="${owner.CREDIT}"></td>
                                 <td th:text="${owner.FREQUENCY}"></td>
                                 <td th:text="${owner.INCOME}"></td>
-                                <td><a href="#">管理</a></td>
+                                <td><a th:href="@{/admin/toBlackList2(USER_NAME=${owner.USER_NAME})}">加入黑名单</a></td>
                             </tr>
                             </tbody>
                         </table>

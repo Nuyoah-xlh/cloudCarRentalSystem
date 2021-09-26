@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rental.mapper.OwnerMapper">
+    <select id="getAllOrders" resultType="Order" parameterType="Owner">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where OWNER_NAME = #{USER_NAME}
+    </select>
+
+    <select id="getOrders_0" resultType="Order" parameterType="Owner">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where OWNER_NAME = #{USER_NAME}
+          and STATUS = 0
+    </select>
+
+    <select id="getOrders_2" resultType="Order" parameterType="Owner">
+        SELECT ORDER_ID,
+               OWNER_NAME,
+               HIRER_NAME,
+               START_TIME,
+               END_TIME,
+               VEHICLE_TYPE,
+               STATUS,
+               AMOUNT,
+               VEHICLE_ID,
+               VEHICLE_BRAND
+        from orders
+        where OWNER_NAME = #{USER_NAME}
+          and STATUS = 2
+    </select>
+
+    <update id="confirm_1" parameterType="Order">
+        UPDATE orders
+        SET STATUS=1,
+            START_TIME=#{START_TIME}
+        WHERE ORDER_ID = #{ORDER_ID}
+    </update>
+
+    <update id="confirm_2" parameterType="Order">
+        UPDATE orders
+        SET STATUS=3,
+            END_TIME=#{END_TIME}
+        WHERE ORDER_ID = #{ORDER_ID}
+    </update>
+
+    <update id="refuse" parameterType="Order">
+        UPDATE orders
+        SET STATUS=3
+        WHERE ORDER_ID = #{ORDER_ID}
+    </update>
+
+    <!--getMessageList-->
+    <select id="getMessageList" resultType="Message" parameterType="Owner">
+        SELECT MESSAGE_ID, SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS
+        FROM message
+        WHERE SEND_NAME = #{USER_NAME}
+           OR RECEIVE_NAME = #{USER_NAME}
+    </select>
+
+    <!--updateMsgStatus-->
+    <update id="updateMsgStatus" parameterType="Message">
+        UPDATE message
+        set STATUS = 1
+        WHERE MESSAGE_ID = #{MESSAGE_ID}
+    </update>
+
+    <!--addMsg-->
+    <insert id="addMsg" parameterType="Message">
+        INSERT INTO message(SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS)
+        VALUES (#{SEND_NAME}, #{RECEIVE_NAME}, #{DETAIL}, #{SEND_TIME}, #{STATUS})
+    </insert>
+
+    <select id="getInfo" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               TEL,
+               USER_TYPE,
+               CREDIT,
+               EMAIL,
+               ID,
+               FREQUENCY
+        FROM login
+                 NATURAL JOIN owner_of_vehicle
+        WHERE USER_NAME = #{USER_NAME}
+    </select>
+
+    <select id="getVehicleById" parameterType="Vehicle" resultType="Vehicle">
+        SELECT VEHICLE_ID,
+               VEHICLE_TYPE,
+               VEHICLE_BRAND,
+               OWNER_ID,
+               DURATION,
+               STATUS,
+               RENTAL_PRICE,
+               DEADLINE,
+               LOCATION
+        FROM vehicle
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </select>
+
+    <insert id="addVehicle" parameterType="Vehicle">
+        INSERT INTO vehicle(VEHICLE_ID, VEHICLE_TYPE, VEHICLE_BRAND, OWNER_ID, DURATION, STATUS, RENTAL_PRICE,
+                            DEADLINE, LOCATION)
+        VALUES (#{VEHICLE_ID}, #{VEHICLE_TYPE}, #{VEHICLE_BRAND}, #{OWNER_ID}, #{DURATION}, #{STATUS}, #{RENTAL_PRICE},
+                #{DEADLINE}, #{LOCATION})
+    </insert>
+
+    <update id="modify" parameterType="Vehicle">
+        UPDATE vehicle
+        SET VEHICLE_TYPE=#{VEHICLE_TYPE},
+            VEHICLE_BRAND=#{VEHICLE_BRAND},
+            RENTAL_PRICE=#{RENTAL_PRICE},
+            DEADLINE=#{DEADLINE},
+            LOCATION=#{LOCATION}
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </update>
+
+    <update id="updateVehicleStatus" parameterType="Vehicle">
+        UPDATE vehicle
+        SET STATUS=#{STATUS}
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </update>
+
+
+</mapper>

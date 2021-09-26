@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人信息</title>
+    <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
+    <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <!--    部分css样式-->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        form {
+            width: 570px;
+            height: 300px;
+            margin: 100px auto;
+        }
+
+        label {
+            width: 64px;
+            float: left;
+            clear: left;
+            height: 36px;
+            line-height: 36px;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 300px;
+            height: 36px;
+            line-height: 36px;
+            margin-top: 10px;
+            text-indent: 8px;
+            font-size: 16px;
+            font-family: "微软雅黑";
+            border: 1px solid #ccc;
+            float: left;
+        }
+
+        #sub {
+            width: 302px;
+            height: 40px;
+            border: 1px solid #ccc;
+            background: #888;
+            color: #fff;
+            font-size: 18px;
+            text-indent: 0;
+        }
+
+        #sub {
+            width: 302px;
+            height: 40px;
+            border: 1px solid #ccc;
+            background: #888;
+            color: #fff;
+            font-size: 18px;
+            text-indent: 0;
+        }
+
+        #sub2 {
+            width: 302px;
+            height: 40px;
+            border: 1px solid #ccc;
+            background: #888;
+            color: #fff;
+            font-size: 18px;
+            text-indent: 0;
+        }
+
+        .spa {
+            height: 36px;
+            line-height: 36px;
+            width: 204px;
+            display: inline-block;
+            float: left;
+            font-size: 12px;
+            color: #e21f15;
+            text-indent: 10px;
+            margin-top: 10px;
+        }
+
+        a {
+            float: none;
+            font-size: 14px;
+        }
+
+        a:link {
+            color: #b64741;
+        }
+
+        a:visited {
+            color: #b64741;
+        }
+
+        a:hover {
+            color: #d62c23;
+        }
+
+        a:active {
+            color: #e21f15;
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="#">云 租 车 系 统</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="搜 索" aria-label="Search for..."
+                   aria-describedby="btnNavbarSearch"/>
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- 个人设置-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
+                <li><a class="dropdown-item" th:href="@{/login/toModify}">修改密码</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/signOut}">退出登录</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <!--侧边栏-->
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">订单</div>
+                    <a class="nav-link" th:href="@{/owner/index}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        历史订单
+                    </a>
+                    <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link" th:href="@{/owner/orders_0}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        租车处理
+                    </a>
+                    <a class="nav-link" th:href="@{/owner/orders_2}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        还车处理
+                    </a>
+                    <div class="sb-sidenav-menu-heading">系统功能</div>
+                    <a class="nav-link" th:href="@{/owner/message_list}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        我的留言
+                    </a>
+                    <a class="nav-link" th:href="@{/owner/to_send}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        发送留言
+                    </a>
+                    <a class="nav-link" th:href="@{/owner/modify}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        新增/修改车辆信息
+                    </a>
+                    <a class="nav-link" th:href="@{/owner/toAdmin}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        联系管理员
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">已登录:</div>
+                <a th:href="@{/basic/perInfo}" th:text="${session.user_name}"></a>
+            </div>
+        </nav>
+    </div>
+    <!--    显示信息-->
+    <div id="layoutSidenav_content">
+        <form th:action="@{/owner/msgReply}" method="post">
+            <label id="user_name_">接收方：</label><input type="text" name="receive" id="user_name"
+                                                      th:if="${receive}!=null"
+                                                      th:value="${receive}"
+                                                      th:placeholder="${receive}"/>
+            <input type="text" name="receive" id="user_name1"
+                   th:if="${receive}==null"/><span
+                class="spa spa3"></span><br/>
+            <label id="username_">发送方：</label><input type="text" name="send" id="username"
+                                                     th:value="${session.user_name}"
+                                                     th:placeholder="${session.user_name}" readonly="true"/><span
+                class="spa spa1"></span><br/>
+            <label id="address_num_">内&nbsp;容：</label><textarea name="content" placeholder="请输入留言内容"></textarea><br/>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="submit" id="sub" value="发送留言" onsubmit="confirm();"/>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="reset" value="放弃发送" id="sub2"/>
+        </form>
+    </div>
+    <script>
+        function confirm() {
+            var flag = confirm("确认发送留言？");
+            if (flag == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/static/login/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/scripts.js}"></script>
+    <script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>
+    <script th:src="@{/static/login/simple-datatables@latest.js}" crossorigin="anonymous"></script>
+    <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js}"></script>
+</body>
+
+</html>

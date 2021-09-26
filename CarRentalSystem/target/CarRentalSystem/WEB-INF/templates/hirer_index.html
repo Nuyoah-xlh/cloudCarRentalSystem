@@ -15,7 +15,7 @@
     <script>
         $(document).ready(function () {
             var cli;
-            alert('11111');
+            // alert('11111');
             var m1 = new MyModal.modal(function () {
                 // alert("已发送租车请求！");
                 // cli.click();
@@ -44,7 +44,7 @@
                 });
             });
             $(".btn1").click(function () {
-                cli = $(this).siblings("a")[0];
+                // cli = $(this).siblings("a")[0];
                 var res = $(this).parent().siblings(".veh_info").text();
                 $("#veh_info_").html(res);
                 m1.show();
@@ -102,8 +102,8 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/toModify}">修改密码</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
@@ -167,8 +167,6 @@
                                 <th>品牌</th>
                                 <th>型号</th>
                                 <th>车牌号</th>
-                                <th>车主用户名</th>
-                                <th>已租时长(小时)</th>
                                 <th>租赁状态</th>
                                 <th>位置</th>
                                 <th>最迟还车时间</th>
@@ -206,8 +204,8 @@
                                 <td th:text="${vehicle.DEADLINE}"></td>
                                 <td th:text="${vehicle.RENTAL_PRICE}"></td>
                                 <td>
-                                    <a th:href="@{/admin/rent(VEHICLE_ID=${vehicle.VEHICLE_ID})}"
-                                       style="visibility:hidden;position: absolute;"></a>
+                                    <!--                                    <a th:href="@{/hirer/to_rent(VEHICLE_ID=${vehicle.VEHICLE_ID},VEHICLE_TYPE=${vehicle.VEHICLE_TYPE},VEHICLE_BRAND=${vehicle.VEHICLE_BRAND},OWNER_NAME=${vehicle.OWNER_ID})}"-->
+                                    <!--                                       style="visibility:hidden;position: absolute;"></a>-->
                                     <button class="btn1" th:text="租车">租车</button>
                                 </td>
                             </tr>
@@ -230,6 +228,7 @@
         </footer>
     </div>
 </div>
+<a id="hid" th:href="@{/hirer/index}"></a>
 <!--<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>-->
 <!--<script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>-->
 

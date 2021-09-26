@@ -12,6 +12,12 @@ public interface AdminService {
     //根据用户名查询个人信息
     public UserInfo getPerInfo_Admin(String USER_NAME);
 
+    //根据用户名查询个人信息
+    public UserInfo getPerInfo_Hirer(String USER_NAME);
+
+    //根据用户名查询个人信息
+    public List<UserInfo> getPerInfo_Owner(String USER_NAME);
+
     //查询所有租车人信息
     public List<Hirer> getHirerList();
 
@@ -47,5 +53,20 @@ public interface AdminService {
 
     //插入一条留言
     public void addMsg(Message message);
+
+    //获取登录历史
+    public List<Login> getLoginLog();
+
+    //加入黑名单
+    public void toBlackList1(Hirer hirer);
+
+    //加入黑名单
+    public void toBlackList2(Owner owner);
+
+    //取出黑名单
+    public void outBlackList1(Hirer hirer);
+
+    //取出黑名单
+    public void outBlackList2(Owner owner);
 
 }

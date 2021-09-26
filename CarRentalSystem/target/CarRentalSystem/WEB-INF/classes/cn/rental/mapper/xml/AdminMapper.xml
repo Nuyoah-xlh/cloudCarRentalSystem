@@ -30,8 +30,7 @@
                ID,
                TEL,
                CREDIT,
-               EMAIL,
-               LOCATION
+               EMAIL
         FROM owner_of_vehicle
                  join vehicle
         WHERE USER_NAME = #{USER_NAME}
@@ -185,6 +184,35 @@
         INSERT INTO message(SEND_NAME, RECEIVE_NAME, DETAIL, SEND_TIME, STATUS)
         VALUES (#{SEND_NAME}, #{RECEIVE_NAME}, #{DETAIL}, #{SEND_TIME}, #{STATUS})
     </insert>
+
+    <select id="getLoginLog" resultType="Login">
+        SELECT USER_NAME, PASSWORD, LAST_TIME, TIMES, STATE, REGISTER_TIME, USER_TYPE
+        FROM login
+    </select>
+
+    <update id="toBlackList1" parameterType="Hirer">
+        UPDATE hirer_of_vehicle
+        SET CREDIT=59
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="toBlackList2" parameterType="Owner">
+        UPDATE owner_of_vehicle
+        SET CREDIT=59
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="outBlackList1" parameterType="Hirer">
+        UPDATE hirer_of_vehicle
+        SET CREDIT=60
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="outBlackList2" parameterType="Owner">
+        UPDATE owner_of_vehicle
+        SET CREDIT=60
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
 
 
 </mapper>

@@ -3,23 +3,16 @@ package cn.rental.controller;
 import cn.rental.bean.*;
 import cn.rental.service.AdminService;
 import cn.rental.service.HirerService;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.standard.expression.OrExpression;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -51,10 +44,10 @@ public class HirerController {
     @ResponseBody
     public String to_rent(HttpSession httpSession, HttpServletRequest httpServletRequest) {
         if ("1".equals(httpSession.getAttribute("user_status"))) {
-            String vehicle_id = httpServletRequest.getParameter("VEHICLE_ID");
-            String vehicle_type = httpServletRequest.getParameter("VEHICLE_TYPE");
-            String vehicle_brand = httpServletRequest.getParameter("VEHICLE_BRAND");
-            String owner_name = httpServletRequest.getParameter("OWNER_NAME");
+            String vehicle_id = httpServletRequest.getParameter("v_id");
+            String vehicle_type = httpServletRequest.getParameter("tp");
+            String vehicle_brand = httpServletRequest.getParameter("brand");
+            String owner_name = httpServletRequest.getParameter("owner");
             //首先查询是否已有订单正在进行
             Order order = new Order();
             order.setHIRER_NAME((String) httpSession.getAttribute("user_name"));
@@ -116,7 +109,7 @@ public class HirerController {
         return modelAndView;
     }
 
-    //取消订单
+    //结束订单
     @RequestMapping("/cancel")
     public ModelAndView cancel(HttpSession httpSession, HttpServletRequest httpServletRequest) {
         System.out.println("进入cancel");
@@ -155,6 +148,20 @@ public class HirerController {
                 order2.setAMOUNT(income);
                 order2.setEND_TIME(current);
                 hirerService.over(order2);
+                //如果超时，则扣除10分信誉分
+                Date deadline = vehicle1.getDEADLINE();
+                if (current.after(deadline)) {
+                    Hirer hirer = new Hirer();
+                    hirer.setUSER_NAME((String) httpSession.getAttribute("user_name"));
+                    UserInfo userInfo = hirerService.getInfo((String) httpSession.getAttribute("user_name"));
+                    int credit = (userInfo.getCREDIT() - 10) > 0 ? (userInfo.getCREDIT() - 10) : 0;
+                    hirer.setCREDIT(credit);
+                    hirerService.updateCredit(hirer);
+                }
+                // 更新车辆租赁时长数
+                int duration = vehicle1.getDURATION() + (int) hour;
+                vehicle1.setDURATION(duration);
+                hirerService.updateDuration(vehicle1);
             }
             Hirer hirer = new Hirer();
             hirer.setUSER_NAME((String) httpSession.getAttribute("user_name"));
@@ -186,14 +193,15 @@ public class HirerController {
 
     //更新留言状态
     @RequestMapping("/updateMsgStatus")
+    @ResponseBody
     public String updateMsgStatus(HttpServletRequest httpServletRequest, HttpSession httpSession) {
         if ("1".equals(httpSession.getAttribute("user_status"))) {
             Integer MESSAGE_ID = Integer.valueOf((String) httpServletRequest.getParameter("MESSAGE_ID"));
             String send = (String) httpServletRequest.getParameter("send");
             String username = (String) httpSession.getAttribute("user_name");
-            if (username.equals(send)) {
-                return "true";
-            }
+            //if (username.equals(send)) {
+            //    return "true";
+            //}
             Message message = new Message();
             message.setMESSAGE_ID(MESSAGE_ID);
             hirerService.updateMsgStatus(message);
@@ -240,7 +248,7 @@ public class HirerController {
             hirer.setUSER_NAME((String) httpSession.getAttribute("user_name"));
             List<Message> messageList = hirerService.getMessageList(hirer);
             modelAndView.addObject("messageList", messageList);
-            modelAndView.setViewName("message_list");
+            modelAndView.setViewName("hirer_message");
         } else {
             modelAndView.setViewName("login");
         }

@@ -72,7 +72,7 @@ public class RegisterController {
             //用户名不一致，可注册
 //            httpSession.setAttribute("user_status", "0");
             System.out.println("可以注册");
-            Login login = new Login(user_name, password, "", 0, 0, new Date(), type);
+            Login login = new Login(user_name, password, null, 0, 0, new Date(), type);
             registerService.addOne(login);
             System.out.println(type);
             if (type == 1) {

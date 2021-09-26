@@ -143,6 +143,16 @@
 
     <build>
         <finalName>CarRentalSystem</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
         <resources>
             <!--打包src/main/java下的文件-->
             <resource>
@@ -174,8 +184,18 @@
                     <version>3.0.2</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                        <compilerArguments>
+                            <verbose />
+                            <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>
+                        </compilerArguments>
+                    </configuration>
                 </plugin>
 
 

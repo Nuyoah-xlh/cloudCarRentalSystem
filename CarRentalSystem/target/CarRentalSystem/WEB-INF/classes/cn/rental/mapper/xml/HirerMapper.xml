@@ -131,4 +131,31 @@
         VALUES (#{SEND_NAME}, #{RECEIVE_NAME}, #{DETAIL}, #{SEND_TIME}, #{STATUS})
     </insert>
 
+    <select id="getInfo" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               TEL,
+               USER_TYPE,
+               CREDIT,
+               EMAIL,
+               ID,
+               FREQUENCY
+        FROM login
+                 NATURAL JOIN hirer_of_vehicle
+        WHERE USER_NAME = #{USER_NAME}
+    </select>
+
+    <update id="updateCredit" parameterType="Hirer">
+        UPDATE hirer_of_vehicle
+        SET CREDIT=#{CREDIT}
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="updateDuration" parameterType="Vehicle">
+        UPDATE vehicle
+        SET DURATION=#{DURATION}
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </update>
+
 </mapper>

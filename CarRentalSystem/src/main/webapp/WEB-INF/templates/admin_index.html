@@ -46,12 +46,12 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" th:href="@{/basic/perInfo}" th:text="${session.user_name}">个人信息</a></li>
+                <li><a class="dropdown-item" th:href="@{/basic/perInfo}">个人信息</a></li>
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/toModify}">修改密码</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
@@ -140,10 +140,6 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        平台收益
-                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
@@ -164,7 +160,7 @@
                         <div class="card bg-primary text-white mb-4">
                             <div class="card-body">个人资料</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查看</a>
+                                <a class="small text-white stretched-link" th:href="@{/basic/perInfo}">查看</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -173,7 +169,7 @@
                         <div class="card bg-warning text-white mb-4">
                             <div class="card-body">历 史 登 录</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查 看</a>
+                                <a class="small text-white stretched-link" th:href="@{/admin/login_log}">查 看</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -189,9 +185,9 @@
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">未读留言</div>
+                            <div class="card-body">我的留言</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">查看</a>
+                                <a class="small text-white stretched-link" th:href="@{/admin/message_list}">查看</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>

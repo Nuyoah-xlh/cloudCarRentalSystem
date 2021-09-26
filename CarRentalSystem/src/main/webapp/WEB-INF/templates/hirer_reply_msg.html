@@ -132,8 +132,8 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">注销账号</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/signOut}">退出登录</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/toModify}">修改密码</a></li>
+                <li><a class="dropdown-item" th:href="@{/login/signOut}">退出登录</a></li>
             </ul>
         </li>
     </ul>
@@ -163,9 +163,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" th:href="@{/hirer/to_send}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        个人信息
+                        发送留言
+                    </a>
+                    <a class="nav-link" th:href="@{/hirer/toAdmin}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        联系管理员
                     </a>
                 </div>
             </div>
@@ -189,8 +193,7 @@
                                                      th:value="${session.user_name}"
                                                      th:placeholder="${session.user_name}" readonly="true"/><span
                 class="spa spa1"></span><br/>
-            <label id="address_num_">内&nbsp;容：</label><textarea name="content" placeholder="请输入留言内容"></textarea><span
-                class="spa spa3"></span><br/>
+            <label id="address_num_">内&nbsp;容：</label><textarea name="content" placeholder="请输入留言内容"></textarea><br/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="submit" id="sub" value="发送留言" onsubmit="confirm();"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="reset" value="放弃发送" id="sub2"/>

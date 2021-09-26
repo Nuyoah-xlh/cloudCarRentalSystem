@@ -72,7 +72,7 @@ public class AdminController {
     public ModelAndView blacklist(HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         if ("1".equals(httpSession.getAttribute("user_status"))) {
-            List<UserInfo> userInfoList = new ArrayList<>();
+            List<UserInfo> userInfoList = new ArrayList<UserInfo>();
             userInfoList.addAll(adminService.getBlackList_Hirer());
             userInfoList.addAll(adminService.getBlackList_Owner());
             modelAndView.addObject("blacklist", userInfoList);
@@ -205,9 +205,6 @@ public class AdminController {
             Integer MESSAGE_ID = Integer.valueOf((String) httpServletRequest.getParameter("MESSAGE_ID"));
             String send = (String) httpServletRequest.getParameter("send");
             String username = (String) httpSession.getAttribute("user_name");
-            if (username.equals(send)) {
-                return "true";
-            }
             Message message = new Message();
             message.setMESSAGE_ID(MESSAGE_ID);
             adminService.updateMsgStatus(message);
@@ -247,6 +244,7 @@ public class AdminController {
             message.setSEND_TIME(new Date());
             message.setSTATUS(0);
             adminService.addMsg(message);
+            System.out.println("----" + message);
             //获取留言列表返回列表页面
             AdminInfo adminInfo = new AdminInfo();
             adminInfo.setUSER_NAME((String) httpSession.getAttribute("user_name"));
@@ -255,6 +253,90 @@ public class AdminController {
             modelAndView.setViewName("message_list");
         } else {
             modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
+
+    //历史登录
+    @RequestMapping("/login_log")
+    public ModelAndView login_log(HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            List<Login> logins = adminService.getLoginLog();
+            modelAndView.addObject("login_log", logins);
+            modelAndView.setViewName("login_log");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
+    //加入黑名单
+    @RequestMapping("/toBlackList1")
+    public ModelAndView toBlackList1(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            String USER_NAME = (String) httpServletRequest.getParameter("USER_NAME");
+            Hirer hirer = new Hirer();
+            hirer.setUSER_NAME(USER_NAME);
+            adminService.toBlackList1(hirer);
+            List<UserInfo> userInfoList = new ArrayList<>();
+            userInfoList.addAll(adminService.getBlackList_Hirer());
+            userInfoList.addAll(adminService.getBlackList_Owner());
+            modelAndView.addObject("blacklist", userInfoList);
+            modelAndView.setViewName("blacklist");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
+    //加入黑名单
+    @RequestMapping("/toBlackList2")
+    public ModelAndView toBlackList2(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            String USER_NAME = (String) httpServletRequest.getParameter("USER_NAME");
+            Owner owner = new Owner();
+            owner.setUSER_NAME(USER_NAME);
+            adminService.toBlackList2(owner);
+            List<UserInfo> userInfoList = new ArrayList<>();
+            userInfoList.addAll(adminService.getBlackList_Hirer());
+            userInfoList.addAll(adminService.getBlackList_Owner());
+            modelAndView.addObject("blacklist", userInfoList);
+            modelAndView.setViewName("blacklist");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
+    //移出黑名单
+    @RequestMapping("/outBlackList")
+    public ModelAndView outBlackList(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            String USER_NAME = (String) httpServletRequest.getParameter("username");
+            String tp = (String) httpServletRequest.getParameter("tp");
+            //车主
+            if ("1".equals(tp)) {
+                Hirer hirer = new Hirer();
+                hirer.setUSER_NAME(USER_NAME);
+                adminService.outBlackList1(hirer);
+            }
+            //租车人
+            else {
+                Owner owner = new Owner();
+                owner.setUSER_NAME(USER_NAME);
+                adminService.outBlackList2(owner);
+            }
+            List<UserInfo> userInfoList = new ArrayList<>();
+            userInfoList.addAll(adminService.getBlackList_Hirer());
+            userInfoList.addAll(adminService.getBlackList_Owner());
+            modelAndView.addObject("blacklist", userInfoList);
+            modelAndView.setViewName("blacklist");
+        } else {
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }

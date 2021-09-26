@@ -1,9 +1,6 @@
 package cn.rental.service;
 
-import cn.rental.bean.Hirer;
-import cn.rental.bean.Message;
-import cn.rental.bean.Order;
-import cn.rental.bean.Vehicle;
+import cn.rental.bean.*;
 
 import java.util.List;
 
@@ -44,4 +41,12 @@ public interface HirerService {
     //添加一条留言
     public void addMsg(Message message);
 
+    //查询某人信息
+    public UserInfo getInfo(String USER_NAME);
+
+    // 扣除一定信用分
+    public void updateCredit(Hirer hirer);
+
+    //更新车辆运行时长
+    public void updateDuration(Vehicle vehicle);
 }

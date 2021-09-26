@@ -54,7 +54,7 @@
                 <option>车主</option>
                 <option>管理员</option>
             </select>
-            <a href="javascript:;">忘记密码？</a>
+            <a th:href="@{/login/toModify}">忘记密码？</a>
             <a id="login">
                 <button type="button" onclick="f();">登 录</button>
             </a>
@@ -81,6 +81,6 @@
         </div>
     </footer>
 </div>
-<a id="hid" th:href="@{login/login_success}"></a>
+<a id="hid" th:href="@{/login/login_success}"></a>
 </body>
 </html>
