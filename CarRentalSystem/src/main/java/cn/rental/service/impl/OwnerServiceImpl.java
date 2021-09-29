@@ -146,4 +146,51 @@ public class OwnerServiceImpl implements OwnerService {
             System.out.println(e);
         }
     }
+
+    @Override
+    public void updateFrequency1(Owner owner) {
+        try {
+            ownerMapper.updateFrequency1(owner);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateFrequency2(Hirer hirer) {
+        try {
+            ownerMapper.updateFrequency2(hirer);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateDuration(Vehicle vehicle) {
+        try {
+            ownerMapper.updateDuration(vehicle);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public UserInfo getInfo2(String USER_NAME) {
+        try {
+            return ownerMapper.getInfo2(USER_NAME);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<Vehicle> getVeh(Owner owner) {
+        try {
+            return ownerMapper.getVeh(owner);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 }

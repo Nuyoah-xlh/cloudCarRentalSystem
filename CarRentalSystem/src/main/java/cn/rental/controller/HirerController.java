@@ -40,14 +40,15 @@ public class HirerController {
     }
 
     //点击租车发送请求，创建订单
-    @RequestMapping("/to_rent")
+    @PostMapping("/to_rent")
     @ResponseBody
     public String to_rent(HttpSession httpSession, HttpServletRequest httpServletRequest) {
         if ("1".equals(httpSession.getAttribute("user_status"))) {
-            String vehicle_id = httpServletRequest.getParameter("v_id");
-            String vehicle_type = httpServletRequest.getParameter("tp");
-            String vehicle_brand = httpServletRequest.getParameter("brand");
-            String owner_name = httpServletRequest.getParameter("owner");
+            String vehicle_id = (String) httpServletRequest.getParameter("v_id");
+            String vehicle_type = (String) httpServletRequest.getParameter("tp");
+            String vehicle_brand = (String) httpServletRequest.getParameter("brand");
+            String owner_name = (String) httpServletRequest.getParameter("owner");
+            System.out.println(vehicle_brand + vehicle_id + owner_name + vehicle_type);
             //首先查询是否已有订单正在进行
             Order order = new Order();
             order.setHIRER_NAME((String) httpSession.getAttribute("user_name"));
@@ -199,9 +200,10 @@ public class HirerController {
             Integer MESSAGE_ID = Integer.valueOf((String) httpServletRequest.getParameter("MESSAGE_ID"));
             String send = (String) httpServletRequest.getParameter("send");
             String username = (String) httpSession.getAttribute("user_name");
-            //if (username.equals(send)) {
-            //    return "true";
-            //}
+            //自己是发送方则不改变
+            if (username.equals(send)) {
+                return "true";
+            }
             Message message = new Message();
             message.setMESSAGE_ID(MESSAGE_ID);
             hirerService.updateMsgStatus(message);

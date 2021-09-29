@@ -104,6 +104,10 @@
         a:active {
             color: #e21f15;
         }
+
+        textarea {
+            width: 300px;
+        }
     </style>
 </head>
 
@@ -181,26 +185,31 @@
     </div>
     <!--    显示信息-->
     <div id="layoutSidenav_content">
-        <form th:action="@{/hirer/msgReply}" method="post">
+        <form th:action="@{/hirer/msgReply}" method="post" onsubmit="return confirm1();">
             <label id="user_name_">接收方：</label><input type="text" name="receive" id="user_name"
                                                       th:if="${receive}!=null"
                                                       th:value="${receive}"
                                                       th:placeholder="${receive}"/>
             <input type="text" name="receive" id="user_name1"
-                   th:if="${receive}==null"/><span
-                class="spa spa3"></span><br/>
+                   th:if="${receive}==null"/>
+            <span class="spa spa3"></span><br/>
             <label id="username_">发送方：</label><input type="text" name="send" id="username"
                                                      th:value="${session.user_name}"
                                                      th:placeholder="${session.user_name}" readonly="true"/><span
                 class="spa spa1"></span><br/>
-            <label id="address_num_">内&nbsp;容：</label><textarea name="content" placeholder="请输入留言内容"></textarea><br/>
+            <label id="address_num_">内&nbsp;容：</label><textarea name="content" placeholder="请输入留言内容" id="content"
+                                                                rows="10"></textarea><br/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="submit" id="sub" value="发送留言" onsubmit="confirm();"/>
+            <input type="submit" id="sub" value="发送留言"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="reset" value="放弃发送" id="sub2"/>
         </form>
     </div>
     <script>
-        function confirm() {
+        function confirm1() {
+            if (document.getElementById("user_name").value === "" || document.getElementById("content").value === "") {
+                alert("请完整填写信息！");
+                return false;
+            }
             var flag = confirm("确认发送留言？");
             if (flag == true) {
                 return true;

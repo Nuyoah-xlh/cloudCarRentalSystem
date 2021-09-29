@@ -35,6 +35,9 @@ public interface OwnerMapper {
     //查看信息
     public UserInfo getInfo(String USER_NAME);
 
+    //查看信息
+    public UserInfo getInfo2(String USER_NAME);
+
     //查询车辆信息
     public Vehicle getVehicleById(Vehicle vehicle);
 
@@ -46,5 +49,17 @@ public interface OwnerMapper {
 
     //更新车辆状态
     public void updateVehicleStatus(Vehicle vehicle);
+
+    //更新frequency
+    public void updateFrequency1(Owner owner);
+
+    //更新frequency
+    public void updateFrequency2(Hirer hirer);
+
+    //更新车辆运行时长
+    public void updateDuration(Vehicle vehicle);
+
+    //查询自己的所有车辆
+    public List<Vehicle> getVeh(Owner owner);
 
 }

@@ -9,6 +9,12 @@
     <title>云租车系统</title>
     <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
     <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("order").click();
+        });
+    </script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -91,7 +97,7 @@
                                     <a class="nav-link" th:href="@{/admin/vehicle_list_rent(status=2)}">已下架车辆</a>
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" id="order"
                                data-bs-target="#pagesCollapseError" aria-expanded="false"
                                aria-controls="pagesCollapseError">
                                 车辆上/下架
@@ -124,6 +130,10 @@
                     <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
+                    </a>
+                    <a class="nav-link" th:href="@{/admin/to_send}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        发送留言
                     </a>
                 </div>
             </div>
@@ -182,8 +192,8 @@
                                 <td th:text="${order.VEHICLE_ID}"></td>
                                 <td th:text="${order.OWNER_NAME}"></td>
                                 <td th:text="${order.HIRER_NAME}"></td>
-                                <td th:text="${order.STATUS}!=0?${order.START_TIME}:'---'"></td>
-                                <td th:text="${order.STATUS}==2?${order.END_TIME}:'---'"></td>
+                                <td th:text="${order.STATUS}!=0?${#dates.format(order.START_TIME,'yyyy-MM-dd HH:mm:ss')}:'---'"></td>
+                                <td th:text="${order.STATUS}==2?${#dates.format(order.END_TIME,'yyyy-MM-dd HH:mm:ss')}:'---'"></td>
                                 <td th:text="${order.STATUS}==2?${order.AMOUNT}:'---'"></td>
                                 <td th:switch="${order.STATUS}">
                                     <span th:case="0">待开始</span>

@@ -157,8 +157,8 @@
                                 <th>发送方用户名</th>
                                 <th>接收方用户名</th>
                                 <th width="10%">详细信息</th>
-                                <th width="30%">发送时间</th>
-                                <th>留言状态</th>
+                                <th width="20%">发送时间</th>
+                                <th width="8%">留言状态</th>
                                 <th>操作1</th>
                                 <th>操作2</th>
                             </tr>
@@ -169,8 +169,8 @@
                                 <th>发送方用户名</th>
                                 <th>接收方用户名</th>
                                 <th width="10%">详细信息</th>
-                                <th width="30%">发送时间</th>
-                                <th>留言状态</th>
+                                <th width="20%">发送时间</th>
+                                <th width="8%">留言状态</th>
                                 <th>操作1</th>
                                 <th>操作2</th>
                             </tr>
@@ -182,8 +182,9 @@
                                 <td th:text="${message.RECEIVE_NAME}"></td>
                                 <td class="detail" th:text="${message.DETAIL}" width="10%"
                                     style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></td>
-                                <td width="30%" th:text="${message.SEND_TIME}"></td>
-                                <td th:switch="${message.STATUS}" width="5%">
+                                <td width="20%"
+                                    th:text="${#dates.format(message.SEND_TIME,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:switch="${message.STATUS}" width="8%">
                                     <span th:case="0">未读</span>
                                     <span th:case="1">已读</span>
                                 </td>

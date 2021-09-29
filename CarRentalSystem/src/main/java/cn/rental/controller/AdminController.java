@@ -205,6 +205,10 @@ public class AdminController {
             Integer MESSAGE_ID = Integer.valueOf((String) httpServletRequest.getParameter("MESSAGE_ID"));
             String send = (String) httpServletRequest.getParameter("send");
             String username = (String) httpSession.getAttribute("user_name");
+            //自己是发送方则不改变
+            if (username.equals(send)) {
+                return "true";
+            }
             Message message = new Message();
             message.setMESSAGE_ID(MESSAGE_ID);
             adminService.updateMsgStatus(message);
@@ -340,6 +344,19 @@ public class AdminController {
         }
         return modelAndView;
     }
+
+    //去发送留言
+    @RequestMapping("/to_send")
+    public ModelAndView to_send(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            modelAndView.setViewName("msg_reply");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
 
 
 }

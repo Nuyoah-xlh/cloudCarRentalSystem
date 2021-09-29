@@ -14,6 +14,7 @@
     <script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>
     <script>
         $(document).ready(function () {
+            document.getElementById("veh_1").click();
             var cli;
             // alert('11111');
             var m1 = new MyModal.modal(function () {
@@ -114,6 +115,7 @@
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                       id="veh_1"
                        aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         车辆管理
@@ -122,7 +124,7 @@
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" id="veh_2"
                                data-bs-target="#pagesCollapseAuth" aria-expanded="false"
                                aria-controls="pagesCollapseAuth">
                                 查看车辆
@@ -170,6 +172,10 @@
                     <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
+                    </a>
+                    <a class="nav-link" th:href="@{/admin/to_send}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        发送留言
                     </a>
                 </div>
             </div>
@@ -228,12 +234,12 @@
                                 <td th:text="${vehicle.OWNER_ID}"></td>
                                 <td th:text="${vehicle.DURATION}"></td>
                                 <td th:switch="${vehicle.STATUS}">
-                                    <span th:case="0">在租</span>
+                                    <span th:case="0">待租</span>
                                     <span th:case="1">已租</span>
                                     <span th:case="2">已下架</span>
                                 </td>
                                 <td th:text="${vehicle.LOCATION}"></td>
-                                <td th:text="${vehicle.DEADLINE}"></td>
+                                <td th:text="${#dates.format(vehicle.DEADLINE,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${vehicle.RENTAL_PRICE}"></td>
                                 <td th:if="${opt}!=null">
                                     <a th:href="@{/admin/updateVehById(VEHICLE_ID=${vehicle.VEHICLE_ID},veh_status=${vehicle.STATUS==2?0:2},opt=${opt})}"

@@ -147,7 +147,7 @@
                                                       th:value="${personInfo.USER_NAME}"
                                                       th:placeholder="${personInfo.USER_NAME}" readonly="true"/><span
                 class="spa spa3"><a
-                href="#"
+                th:href="@{/login/modify}"
                 class="reset_pas">修改密码?</a></span><br/>
             <label id="username_">姓&nbsp;名：</label><input type="text" name="username" id="username"
                                                           th:value="${personInfo.NAME}"

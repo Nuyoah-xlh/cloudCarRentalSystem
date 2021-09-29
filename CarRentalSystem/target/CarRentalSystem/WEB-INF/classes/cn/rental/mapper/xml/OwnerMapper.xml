@@ -57,8 +57,7 @@
 
     <update id="confirm_2" parameterType="Order">
         UPDATE orders
-        SET STATUS=3,
-            END_TIME=#{END_TIME}
+        SET STATUS=#{STATUS}
         WHERE ORDER_ID = #{ORDER_ID}
     </update>
 
@@ -104,6 +103,21 @@
         WHERE USER_NAME = #{USER_NAME}
     </select>
 
+    <select id="getInfo2" resultType="UserInfo">
+        SELECT USER_NAME,
+               NAME,
+               SEX,
+               TEL,
+               USER_TYPE,
+               CREDIT,
+               EMAIL,
+               ID,
+               FREQUENCY
+        FROM login
+                 NATURAL JOIN hirer_of_vehicle
+        WHERE USER_NAME = #{USER_NAME}
+    </select>
+
     <select id="getVehicleById" parameterType="Vehicle" resultType="Vehicle">
         SELECT VEHICLE_ID,
                VEHICLE_TYPE,
@@ -140,6 +154,38 @@
         SET STATUS=#{STATUS}
         WHERE VEHICLE_ID = #{VEHICLE_ID}
     </update>
+
+    <update id="updateFrequency1" parameterType="Owner">
+        UPDATE owner_of_vehicle
+        SET FREQUENCY=#{FREQUENCY}
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="updateFrequency2" parameterType="Hirer">
+        UPDATE hirer_of_vehicle
+        SET FREQUENCY=#{FREQUENCY}
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="updateDuration" parameterType="Vehicle">
+        UPDATE vehicle
+        SET DURATION=#{DURATION}
+        WHERE VEHICLE_ID = #{VEHICLE_ID}
+    </update>
+
+    <select id="getVeh" parameterType="Owner" resultType="Vehicle">
+        SELECT VEHICLE_ID,
+               VEHICLE_TYPE,
+               VEHICLE_BRAND,
+               OWNER_ID,
+               DURATION,
+               STATUS,
+               RENTAL_PRICE,
+               DEADLINE,
+               LOCATION
+        FROM vehicle
+        WHERE OWNER_ID = #{USER_NAME}
+    </select>
 
 
 </mapper>

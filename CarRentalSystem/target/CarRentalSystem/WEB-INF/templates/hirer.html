@@ -9,6 +9,12 @@
     <title>云租车系统</title>
     <link th:href="@{/static/login/style_index.css}" rel="stylesheet"/>
     <link th:href="@{/static/startbootstrap-sb-admin-gh-pages/css/styles.css}" rel="stylesheet"/>
+    <script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("hirer").click();
+        });
+    </script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -54,6 +60,7 @@
                     </a>
                     <div class="sb-sidenav-menu-heading">管理</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+                       id="hirer"
                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         用户管理
@@ -124,6 +131,10 @@
                     <a class="nav-link" th:href="@{/admin/message_list}">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
+                    </a>
+                    <a class="nav-link" th:href="@{/admin/to_send}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        发送留言
                     </a>
                 </div>
             </div>

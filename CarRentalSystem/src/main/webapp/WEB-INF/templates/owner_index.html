@@ -69,7 +69,12 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         历史订单
                     </a>
+
                     <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link" th:href="@{/owner/to_veh_modify}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        车辆上/下架
+                    </a>
                     <a class="nav-link" th:href="@{/owner/orders_0}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         租车处理
@@ -165,7 +170,7 @@
                                 <td th:if="${opt}!=null">
                                     <a th:href="@{/owner/confirm(ORDER_ID=${order.ORDER_ID},VEHICLE_ID=${order.VEHICLE_ID},opt=1)}"
                                        style="visibility:hidden;position: absolute;" th:if="${opt}==1"></a>
-                                    <a th:href="@{/owner/confirm(ORDER_ID=${order.ORDER_ID},VEHICLE_ID=${order.VEHICLE_ID},opt=2)}"
+                                    <a th:href="@{/owner/confirm(ORDER_ID=${order.ORDER_ID},VEHICLE_ID=${order.VEHICLE_ID},opt=2,hirer=${order.HIRER_NAME})}"
                                        style="visibility:hidden;position: absolute;" th:if="${opt}==2"></a>
                                     <button class="btn2">确认</button>
                                 </td>

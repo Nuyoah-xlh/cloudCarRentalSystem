@@ -65,6 +65,10 @@
                         历史订单
                     </a>
                     <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link" th:href="@{/owner/to_veh_modify}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        车辆上/下架
+                    </a>
                     <a class="nav-link" th:href="@{/owner/orders_0}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         租车处理
@@ -139,7 +143,7 @@
                                 <td th:text="${adminInfo.USER_NAME}"></td>
                                 <td th:text="${adminInfo.NAME}"></td>
                                 <td th:if="${adminInfo.USER_TYPE}==0">管理员</td>
-                                <td th:text="${adminInfo.LAST_TIME}"></td>
+                                <td th:text="${#dates.format(adminInfo.LAST_TIME,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:switch="${adminInfo.STATE}">
                                     <span th:case="0" th:class="state0">离线</span>
                                     <span th:case="1" th:class="state1">在线</span>

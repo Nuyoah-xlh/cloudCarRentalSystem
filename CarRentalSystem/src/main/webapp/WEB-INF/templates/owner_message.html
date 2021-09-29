@@ -17,7 +17,7 @@
             var MESSAGE_ID;
             var send;
             var m1 = new MyModal.modal(function () {
-                alert("00");
+                // alert("00");
             });
             $("table td .btn1").click(function () {
                 MESSAGE_ID = $(this).parent().siblings(".msg_id").text();
@@ -110,6 +110,10 @@
                         历史订单
                     </a>
                     <div class="sb-sidenav-menu-heading">管理</div>
+                    <a class="nav-link" th:href="@{/owner/to_veh_modify}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        车辆上/下架
+                    </a>
                     <a class="nav-link" th:href="@{/owner/orders_0}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         租车处理
@@ -162,8 +166,8 @@
                                 <th>发送方用户名</th>
                                 <th>接收方用户名</th>
                                 <th width="10%">详细信息</th>
-                                <th width="30%">发送时间</th>
-                                <th>留言状态</th>
+                                <th width="20%">发送时间</th>
+                                <th width="10%">留言状态</th>
                                 <th>操作1</th>
                                 <th>操作2</th>
                             </tr>
@@ -174,8 +178,8 @@
                                 <th>发送方用户名</th>
                                 <th>接收方用户名</th>
                                 <th width="10%">详细信息</th>
-                                <th width="30%">发送时间</th>
-                                <th>留言状态</th>
+                                <th width="20%">发送时间</th>
+                                <th width="10%">留言状态</th>
                                 <th>操作1</th>
                                 <th>操作2</th>
                             </tr>
@@ -187,8 +191,9 @@
                                 <td th:text="${message.RECEIVE_NAME}"></td>
                                 <td class="detail" th:text="${message.DETAIL}" width="10%"
                                     style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></td>
-                                <td width="30%" th:text="${message.SEND_TIME}"></td>
-                                <td th:switch="${message.STATUS}" width="5%">
+                                <td width="20%"
+                                    th:text="${#dates.format(message.SEND_TIME,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td width="10%" th:switch="${message.STATUS}">
                                     <span th:case="0">未读</span>
                                     <span th:case="1">已读</span>
                                 </td>

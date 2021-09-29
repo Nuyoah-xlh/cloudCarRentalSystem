@@ -182,6 +182,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         我的留言
                     </a>
+                    <a class="nav-link" th:href="@{/admin/to_send}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        发送留言
+                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
@@ -234,7 +238,8 @@
                                 <td th:text="${message.RECEIVE_NAME}"></td>
                                 <td class="detail" th:text="${message.DETAIL}" width="10%"
                                     style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></td>
-                                <td width="30%" th:text="${message.SEND_TIME}"></td>
+                                <td width="30%"
+                                    th:text="${#dates.format(message.SEND_TIME,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:switch="${message.STATUS}" width="5%">
                                     <span th:case="0">未读</span>
                                     <span th:case="1">已读</span>

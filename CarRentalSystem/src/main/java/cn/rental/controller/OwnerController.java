@@ -2,13 +2,16 @@ package cn.rental.controller;
 
 import cn.rental.bean.*;
 import cn.rental.service.AdminService;
+import cn.rental.service.HirerService;
 import cn.rental.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.RemoteTimeoutException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -27,6 +30,9 @@ public class OwnerController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private HirerService hirerService;
 
     //获取所有订单
     @RequestMapping("/index")
@@ -86,6 +92,7 @@ public class OwnerController {
             String ORDER_ID = (String) httpServletRequest.getParameter("ORDER_ID");
             String opt = (String) httpServletRequest.getParameter("opt");
             String VEHICLE_ID = (String) httpServletRequest.getParameter("VEHICLE_ID");
+            String hirer = (String) httpServletRequest.getParameter("hirer");
             Order order = new Order();
             order.setORDER_ID(Integer.parseInt(ORDER_ID));
             //更新车辆状态
@@ -99,6 +106,21 @@ public class OwnerController {
                 ownerService.updateVehicleStatus(vehicle);
             } else if ("2".equals(opt)) {
                 order.setEND_TIME(new Date());
+                //更新frequency
+                UserInfo userInfo = ownerService.getInfo((String) httpSession.getAttribute("user_name"));
+                int freq = userInfo.getFREQUENCY() + 1;
+                Owner owner = new Owner();
+                owner.setUSER_NAME((String) httpSession.getAttribute("user_name"));
+                owner.setFREQUENCY(freq);
+                ownerService.updateFrequency1(owner);
+                UserInfo userInfo1 = ownerService.getInfo2(hirer);
+                freq = userInfo1.getFREQUENCY() + 1;
+                Hirer hirer1 = new Hirer();
+                hirer1.setUSER_NAME(hirer);
+                hirer1.setFREQUENCY(freq);
+                ownerService.updateFrequency2(hirer1);
+                System.out.println("opt2");
+                order.setSTATUS(3);
                 ownerService.confirm_2(order);
                 //变为在租
                 vehicle.setSTATUS(0);
@@ -159,6 +181,10 @@ public class OwnerController {
             Integer MESSAGE_ID = Integer.valueOf((String) httpServletRequest.getParameter("MESSAGE_ID"));
             String send = (String) httpServletRequest.getParameter("send");
             String username = (String) httpSession.getAttribute("user_name");
+            //自己是发送方则不改变
+            if (username.equals(send)) {
+                return "true";
+            }
             Message message = new Message();
             message.setMESSAGE_ID(MESSAGE_ID);
             ownerService.updateMsgStatus(message);
@@ -298,5 +324,50 @@ public class OwnerController {
         return modelAndView;
     }
 
+    //我的车辆
+    @RequestMapping("/to_veh_modify")
+    public ModelAndView veh_modify(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            Owner owner = new Owner();
+            owner.setUSER_NAME((String) httpSession.getAttribute("user_name"));
+            List<Vehicle> vehicleList = ownerService.getVeh(owner);
+            modelAndView.addObject("vehicle_list", vehicleList);
+            modelAndView.setViewName("modify_vehicle");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
+    //上下架
+    @RequestMapping("/up_down")
+    public ModelAndView up_down(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        ModelAndView modelAndView = new ModelAndView();
+        if ("1".equals(httpSession.getAttribute("user_status"))) {
+            String VEHICLE_ID = (String) httpServletRequest.getParameter("VEHICLE_ID");
+            String status = (String) httpServletRequest.getParameter("status");
+            Vehicle vehicle = new Vehicle();
+            vehicle.setVEHICLE_ID(VEHICLE_ID);
+            //待租，则下架
+            if ("0".equals(status)) {
+                vehicle.setSTATUS(2);
+                ownerService.updateVehicleStatus(vehicle);
+            }
+            //已下架，则上架
+            else if ("2".equals(status)) {
+                vehicle.setSTATUS(0);
+                ownerService.updateVehicleStatus(vehicle);
+            }
+            Owner owner = new Owner();
+            owner.setUSER_NAME((String) httpSession.getAttribute("user_name"));
+            List<Vehicle> vehicleList = ownerService.getVeh(owner);
+            modelAndView.addObject("vehicle_list", vehicleList);
+            modelAndView.setViewName("modify_vehicle");
+        } else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
 
 }

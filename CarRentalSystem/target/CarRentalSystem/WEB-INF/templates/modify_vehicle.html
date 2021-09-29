@@ -14,15 +14,43 @@
     <script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>
     <script>
         $(document).ready(function () {
-            $("table td .btn2").click(function () {
-                $(this).siblings("a")[0].click();
+            var cli;
+            // alert('11111');
+            $("table td .btn1").click(function () {
+                cli = $(this).siblings("a")[0];
+                cli.click();
+                // alert(q);
             });
-
+            // $(".btn1").click(function () {
+            //     m1.show();
+            //     var q = $(this).siblings("a").text();
+            //     alert(q);
+            // })
         });
     </script>
-
 </head>
 <body class="sb-nav-fixed">
+<!--模态框-->
+<div class="m-modal">
+    <div class="m-modal-dialog">
+        <div class="m-top">
+            <h4 class="m-modal-title">
+            </h4>
+            <span class="m-modal-close">&times;</span>
+        </div>
+        <div class="m-middle">
+            <!--content-->
+            <p>确认将该辆车上架：</p>
+            <p id="veh_info_"></p>
+
+        </div>
+        <div class="m-bottom">
+            <button class="m-btn-sure">确定</button>
+            <button class="m-btn-cancel">取消</button>
+        </div>
+    </div>
+
+</div>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="#">云 租 车 系 统</a>
@@ -64,6 +92,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         历史订单
                     </a>
+
                     <div class="sb-sidenav-menu-heading">管理</div>
                     <a class="nav-link" th:href="@{/owner/to_veh_modify}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -105,54 +134,65 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">管理员信息</h1>
+                <h1 class="mt-4">车辆信息</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">管理员</li>
+                    <li class="breadcrumb-item active">车辆</li>
                 </ol>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i> 管理员信息表
+                        <i class="fas fa-table me-1"></i> 车辆信息表
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
-                                <th>工号</th>
-                                <th>用户名</th>
-                                <th>姓名</th>
-                                <th>用户类型</th>
-                                <th>最近登录时间</th>
-                                <th>当前状态</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>已租时长(小时)</th>
+                                <th>租赁状态</th>
+                                <th>位置</th>
+                                <th>最迟还车时间</th>
+                                <th>价格(元/天)</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>工号</th>
-                                <th>用户名</th>
-                                <th>姓名</th>
-                                <th>用户类型</th>
-                                <th>最近登录时间</th>
-                                <th>当前状态</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>车牌号</th>
+                                <th>车主用户名</th>
+                                <th>已租时长</th>
+                                <th>租赁状态</th>
+                                <th>位置</th>
+                                <th>最迟还车时间</th>
+                                <th>价格(元/天)</th>
                                 <th>操作</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr th:each="adminInfo: ${adminInfoList}">
-                                <td th:text="${adminInfo.ADMIN_ID}"></td>
-                                <td th:text="${adminInfo.USER_NAME}"></td>
-                                <td th:text="${adminInfo.NAME}"></td>
-                                <td th:if="${adminInfo.USER_TYPE}==0">管理员</td>
-                                <td th:text="${#dates.format(adminInfo.LAST_TIME,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td th:switch="${adminInfo.STATE}">
-                                    <span th:case="0" th:class="state0">离线</span>
-                                    <span th:case="1" th:class="state1">在线</span>
-                                    <span th:case="2" th:class="state2">已注销</span>
+                            <tr th:each="vehicle: ${vehicle_list}">
+                                <td th:text="${vehicle.VEHICLE_BRAND}+'&nbsp;'" class="veh_info"></td>
+                                <td th:text="${vehicle.VEHICLE_TYPE}+'&nbsp;'" class="veh_info"></td>
+                                <td th:text="${vehicle.VEHICLE_ID}+'&nbsp;'" class="veh_info"></td>
+                                <td th:text="${vehicle.OWNER_ID}"></td>
+                                <td th:text="${vehicle.DURATION}"></td>
+                                <td th:switch="${vehicle.STATUS}">
+                                    <span th:case="0">待租</span>
+                                    <span th:case="1">已租</span>
+                                    <span th:case="2">已下架</span>
                                 </td>
+                                <td th:text="${vehicle.LOCATION}"></td>
+                                <td th:text="${#dates.format(vehicle.DEADLINE,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:text="${vehicle.RENTAL_PRICE}"></td>
                                 <td>
-                                    <a th:href="@{/owner/toMsgReply(receive=${adminInfo.USER_NAME})}"
+                                    <a th:href="@{/owner/up_down(VEHICLE_ID=${vehicle.VEHICLE_ID},status=${vehicle.STATUS})}"
                                        style="visibility:hidden;position: absolute;"></a>
-                                    <button class="btn2">留言</button>
+                                    <button class="btn1" th:if="${vehicle.STATUS}==2">上架</button>
+                                    <button class="btn1" th:if="${vehicle.STATUS}==0">下架</button>
+                                    <span th:if="${vehicle.STATUS}==1">---</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -177,12 +217,13 @@
 <!--<script th:src="@{/static/jQuery/jquery-3.6.0.min.js}"></script>-->
 <!--<script th:src="@{/static/modal/js/jquery.my-modal.1.1.js}"></script>-->
 
-<script th:src="@{/static/login/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+<script th:src="@{/static/login/bootstrap.bundle.min.js}"
+        crossorigin="anonymous"></script>
 <script th:src="@{/static/login/all_index.min.js}" crossorigin="anonymous"></script>
 <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/scripts.js}"></script>
-<!--<script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>-->
-<!--<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>-->
-<!--<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>-->
+<script th:src="@{/static/login/Chart_index.js}" crossorigin="anonymous"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-area-demo.js}"></script>
+<script th:src="@{/static/startbootstrap-sb-admin-gh-pages/assets/demo/chart-bar-demo.js}"></script>
 <script th:src="@{/static/login/simple-datatables@latest.js}" crossorigin="anonymous"></script>
 <script th:src="@{/static/startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js}"></script>
 </body>
