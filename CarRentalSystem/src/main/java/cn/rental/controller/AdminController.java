@@ -1,3 +1,8 @@
+/*
+  @author: 肖林航
+  @date: 2021/09/15 13:20:15
+*/
+
 package cn.rental.controller;
 
 import cn.rental.bean.*;
@@ -356,7 +361,6 @@ public class AdminController {
         }
         return modelAndView;
     }
-
 
 
 }

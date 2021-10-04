@@ -193,8 +193,8 @@
                                 <td th:text="${order.OWNER_NAME}"></td>
                                 <td th:text="${order.HIRER_NAME}"></td>
                                 <td th:text="${order.STATUS}!=0?${#dates.format(order.START_TIME,'yyyy-MM-dd HH:mm:ss')}:'---'"></td>
-                                <td th:text="${order.STATUS}==2?${#dates.format(order.END_TIME,'yyyy-MM-dd HH:mm:ss')}:'---'"></td>
-                                <td th:text="${order.STATUS}==2?${order.AMOUNT}:'---'"></td>
+                                <td th:text="${order.STATUS}>=2?${#dates.format(order.END_TIME,'yyyy-MM-dd HH:mm:ss')}:'---'"></td>
+                                <td th:text="${order.STATUS}>=2?${order.AMOUNT}:'---'"></td>
                                 <td th:switch="${order.STATUS}">
                                     <span th:case="0">待开始</span>
                                     <span th:case="1">正在进行</span>
