@@ -47,7 +47,8 @@
         </div>
         <div class="m-middle">
             <!--content-->
-            <p>确认将该辆车上架：</p>
+            <p th:if="${opt=='up'}">确认将该辆车上架：</p>
+            <p th:if="${opt=='down'}">确认将该辆车下架：</p>
             <p id="veh_info_"></p>
 
         </div>

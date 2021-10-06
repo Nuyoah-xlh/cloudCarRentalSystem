@@ -198,4 +198,22 @@ public class OwnerServiceImpl implements OwnerService {
             return null;
         }
     }
+
+    @Override
+    public void updateCredit1(Owner owner) {
+        try {
+            ownerMapper.updateCredit1(owner);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void updateCredit2(Hirer hirer) {
+        try {
+            ownerMapper.updateCredit2(hirer);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

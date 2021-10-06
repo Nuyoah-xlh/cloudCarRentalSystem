@@ -68,4 +68,10 @@ public interface OwnerService {
     //查询自己的所有车辆
     public List<Vehicle> getVeh(Owner owner);
 
+    //更新信誉分
+    public void updateCredit1(Owner owner);
+
+    //更新信誉分
+    public void updateCredit2(Hirer owner);
+
 }

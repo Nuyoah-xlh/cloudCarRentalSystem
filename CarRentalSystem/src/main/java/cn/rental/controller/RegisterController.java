@@ -4,11 +4,9 @@
 */
 package cn.rental.controller;
 
-import cn.rental.bean.AdminInfo;
 import cn.rental.bean.Hirer;
 import cn.rental.bean.Login;
 import cn.rental.bean.Owner;
-import cn.rental.mapper.RegisterMapper;
 import cn.rental.service.LoginService;
 import cn.rental.service.RegisterService;
 import cn.rental.util.BASE64Util;

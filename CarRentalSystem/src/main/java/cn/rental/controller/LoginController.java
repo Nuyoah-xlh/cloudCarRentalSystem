@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -140,6 +141,7 @@ public class LoginController {
     @RequestMapping("/modify")
     @ResponseBody
     public String modify(HttpServletRequest httpServletRequest) {
+        //System.out.println("00000");
         String inputEmail = (String) httpServletRequest.getParameter("inputEmail");
         String password = (String) httpServletRequest.getParameter("inputPwd");
         String inputName = (String) httpServletRequest.getParameter("inputName");
@@ -147,6 +149,10 @@ public class LoginController {
         UserInfo userInfo = new UserInfo();
         userInfo.setUSER_NAME(inputName);
         userInfo.setPASSWORD(password);
+        Login one = loginService.findOne(inputName);
+        if (one == null) {
+            return "false";
+        }
         loginService.modify(userInfo);
         return "true";
     }
@@ -156,5 +162,6 @@ public class LoginController {
     public String toModify() {
         return "password";
     }
+
 
 }

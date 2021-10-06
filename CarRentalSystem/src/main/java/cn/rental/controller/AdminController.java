@@ -53,7 +53,7 @@ public class AdminController {
             modelAndView.addObject("hirerList", hirerList);
             modelAndView.setViewName("hirer");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -67,7 +67,7 @@ public class AdminController {
             modelAndView.addObject("ownerList", ownerList);
             modelAndView.setViewName("owner");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -83,7 +83,7 @@ public class AdminController {
             modelAndView.addObject("blacklist", userInfoList);
             modelAndView.setViewName("blacklist");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -97,7 +97,7 @@ public class AdminController {
             modelAndView.addObject("vehicle_list", vehicleList);
             modelAndView.setViewName("vehicleList");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -120,7 +120,7 @@ public class AdminController {
             modelAndView.addObject("vehicle_list", vehicleList);
             modelAndView.setViewName("vehicleList");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -150,10 +150,10 @@ public class AdminController {
                 modelAndView.addObject("vehicle_list", vehicleList);
                 modelAndView.setViewName("vehicleList");
             } else {
-                modelAndView.setViewName("404");
+                modelAndView.setViewName("login");
             }
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -167,7 +167,7 @@ public class AdminController {
             modelAndView.addObject("orderList", orderList);
             modelAndView.setViewName("orderList");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -181,7 +181,7 @@ public class AdminController {
             modelAndView.addObject("orderList", orderList);
             modelAndView.setViewName("orderList");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -197,7 +197,7 @@ public class AdminController {
             modelAndView.addObject("messageList", messageList);
             modelAndView.setViewName("message_list");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -232,7 +232,7 @@ public class AdminController {
             modelAndView.addObject("receive", receive);
             modelAndView.setViewName("msg_reply");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -261,7 +261,7 @@ public class AdminController {
             modelAndView.addObject("messageList", messageList);
             modelAndView.setViewName("message_list");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }

@@ -201,7 +201,7 @@
                                     <button class="btn1">查看</button>
                                 </td>
                                 <td>
-                                    <a th:href="@{/owner/toMsgReply(receive=${message.SEND_NAME}==${session.user_name}?${message.RECEIVE_NAME}:${session.user_name})}"
+                                    <a th:href="@{/owner/toMsgReply(receive=${message.SEND_NAME}==${session.user_name}?${message.RECEIVE_NAME}:${message.SEND_NAME})}"
                                        style="visibility:hidden;position: absolute;"></a>
                                     <button class="btn2">回复</button>
                                 </td>

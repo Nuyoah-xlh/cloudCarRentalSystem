@@ -130,6 +130,12 @@ public class OwnerController {
                 //变为在租
                 vehicle.setSTATUS(0);
                 ownerService.updateVehicleStatus(vehicle);
+                int credit1 = userInfo.getCREDIT() + 10 > 100 ? 100 : userInfo.getCREDIT() + 10;
+                owner.setCREDIT(credit1);
+                ownerService.updateCredit1(owner);
+                int credit2 = userInfo1.getCREDIT() + 10 > 100 ? 100 : userInfo1.getCREDIT() + 10;
+                hirer1.setCREDIT(credit2);
+                ownerService.updateCredit2(hirer1);
             }
             Owner owner = new Owner();
             owner.setUSER_NAME((String) httpSession.getAttribute("user_name"));
@@ -210,7 +216,7 @@ public class OwnerController {
             modelAndView.addObject("receive", receive);
             modelAndView.setViewName("owner_reply_msg");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }

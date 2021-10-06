@@ -10,14 +10,6 @@
     <!-- 启动注解驱动 -->
     <mvc:annotation-driven/>
 
-    <!--<mvc:resources location="/images/" mapping="/images/**"/>-->
-    <!--<mvc:resources location="/image/" mapping="/image/**"/>-->
-    <!--<mvc:resources location="/static/login/" mapping="/static/login/**"/>-->
-    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
-    <!--<mvc:resources location="/video/" mapping="/video/**"/>-->
-    <!-- 当在web.xml 中   DispatcherServlet使用     <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
-    <!--<mvc:default-servlet-handler/>-->
-
 
     <!-- 扫描业务代码 -->
     <context:component-scan base-package="cn.rental"/>

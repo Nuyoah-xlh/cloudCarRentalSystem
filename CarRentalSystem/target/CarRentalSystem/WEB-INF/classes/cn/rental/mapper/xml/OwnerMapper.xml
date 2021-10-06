@@ -187,5 +187,17 @@
         WHERE OWNER_ID = #{USER_NAME}
     </select>
 
+    <update id="updateCredit1" parameterType="Owner">
+        UPDATE owner_of_vehicle
+        SET CREDIT=#{CREDIT}
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
+    <update id="updateCredit2" parameterType="Hirer">
+        UPDATE owner_of_vehicle
+        SET CREDIT=#{CREDIT}
+        WHERE USER_NAME = #{USER_NAME}
+    </update>
+
 
 </mapper>

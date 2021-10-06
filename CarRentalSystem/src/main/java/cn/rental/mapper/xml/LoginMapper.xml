@@ -20,7 +20,7 @@
                  NATURAL JOIN hirer_of_vehicle
     </select>
 
-    <update id="modify1" parameterType="UserInfo">
+    <update id="modify" parameterType="UserInfo">
         UPDATE login
         SET PASSWORD=#{PASSWORD}
         WHERE USER_NAME = #{USER_NAME}

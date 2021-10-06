@@ -39,7 +39,7 @@ public class HirerController {
             modelAndView.addObject("vehicle_list", vehicleList);
             modelAndView.setViewName("hirer_index");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -228,7 +228,7 @@ public class HirerController {
             modelAndView.addObject("receive", receive);
             modelAndView.setViewName("hirer_reply_msg");
         } else {
-            modelAndView.setViewName("404");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }

@@ -9,14 +9,14 @@ import cn.rental.bean.Owner;
 import cn.rental.bean.UserInfo;
 import cn.rental.service.AdminService;
 import cn.rental.service.HirerService;
+import cn.rental.service.LoginService;
 import cn.rental.util.BASE64Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,6 +32,9 @@ public class BasicController {
 
     @Autowired
     private HirerService hirerService;
+
+    @Autowired
+    private LoginService loginService;
 
 
     //跳转到个人信息页
@@ -64,21 +67,6 @@ public class BasicController {
         }
         return modelAndView;
     }
-
-    ////修改个人信息，并返回主页
-    //@RequestMapping("revise")
-    //public ModelAndView revise(HttpSession httpSession, HttpServletRequest httpServletRequest) {
-    //    ModelAndView modelAndView = new ModelAndView();
-    //    if ("1".equals(httpSession.getAttribute("user_status"))) {
-    //        //管理员
-    //        if ("0".equals(httpSession.getAttribute("user_type"))) {
-    //            modelAndView.setViewName("admin_index");
-    //        } else {
-    //            modelAndView.setViewName("admin_index");
-    //        }
-    //    }
-    //    return modelAndView;
-    //}
 
 
 }
