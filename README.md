@@ -16,3 +16,14 @@
 * Junit-4.13.2
 * MySQL-5.0.17
 
+运行结果截图：
+
+![](https://cdn.jsdelivr.net/gh/Nuyoah-xlh/jsDelivr-CDN/img/article_pic/Snipaste_2022-01-05_19-48-10.jpg)
+
+![](https://cdn.jsdelivr.net/gh/Nuyoah-xlh/jsDelivr-CDN/img/article_pic/Snipaste_2022-01-05_19-49-45.jpg)
+
+![](https://cdn.jsdelivr.net/gh/Nuyoah-xlh/jsDelivr-CDN/img/article_pic/Snipaste_2022-01-05_19-51-24.jpg)
+
+![](https://cdn.jsdelivr.net/gh/Nuyoah-xlh/jsDelivr-CDN/img/article_pic/Snipaste_2022-01-05_19-50-22.jpg)
+
+![](https://cdn.jsdelivr.net/gh/Nuyoah-xlh/jsDelivr-CDN/img/article_pic/Snipaste_2022-01-05_19-50-54.jpg)
